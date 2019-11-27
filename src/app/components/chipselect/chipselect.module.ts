@@ -1,36 +1,32 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { MatNativeDateModule, MatDatepickerModule, MatAutocompleteModule } from '@angular/material';
 
-import { HomePage } from './home.page';
+import { ChipautocompleteModule } from './autocomplete/chipautocomplete.module';
 
-import { ChipselectComponentModule } from '../components/chipselect/chipselect.module';
-import { DatepickerComponentModule } from '../components/datepicker/datepicker.module';
+import { ChipselectComponent } from './chipselect.component';
+
+import { ChipserviceService } from './chipservice.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ChipselectComponentModule,
-    DatepickerComponentModule,
     ReactiveFormsModule,
+    ChipautocompleteModule,
     MatNativeDateModule,
     MatDatepickerModule,
     MatAutocompleteModule,
-    HttpClientModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HomePage
-      }
-    ])
+    RouterModule.forChild([])
   ],
-  declarations: [HomePage]
+  providers: [ChipserviceService],
+  declarations: [ChipselectComponent],
+  entryComponents: [ChipselectComponent],
+  exports: [ChipselectComponent],
 })
-export class HomePageModule {}
+export class ChipselectComponentModule {}

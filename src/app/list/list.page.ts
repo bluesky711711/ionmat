@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-list',
@@ -6,34 +9,91 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['list.page.scss']
 })
 export class ListPage implements OnInit {
-  private selectedItem: any;
-  private icons = [
-    'flask',
-    'wifi',
-    'beer',
-    'football',
-    'basketball',
-    'paper-plane',
-    'american-football',
-    'boat',
-    'bluetooth',
-    'build'
-  ];
-  public items: Array<{ title: string; note: string; icon: string }> = [];
-  constructor() {
-    for (let i = 1; i < 11; i++) {
-      this.items.push({
-        title: 'Item ' + i,
-        note: 'This is item #' + i,
-        icon: this.icons[Math.floor(Math.random() * this.icons.length)]
-      });
-    }
-  }
+
+  public options: any;
+
+  constructor(private data: DataService, public alertCtrl: AlertController) {}
 
   ngOnInit() {
+    this.getData();
   }
-  // add back when alpha.4 is out
-  // navigate(item) {
-  //   this.router.navigate(['/list', JSON.stringify(item)]);
-  // }
+
+  getData() {
+    this.data.getData().subscribe(data => {
+      this.options = data;
+    });
+  }
+
+  deleteChip(data) {
+    this.data.deleteItem(data.id).subscribe(() => {
+      this.getData();
+   });
+  }
+
+  async presentAlert(type) {
+    if (type === 'new') {
+    const alert = await this.alertCtrl.create({
+      header: 'Create Chip',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'Enter chip name',
+          handler: () => {}
+        }],
+      buttons: [{text: 'Cancel',
+                 role: 'cancel',
+                },
+                {text: 'OK',
+                 handler: (data) => {
+                  const input = data.name1;
+                  if (input.length > 0) { this.addChip(input); } else { return false; }
+                }
+
+                }],
+    });
+    await alert.present();
+  } else {
+    const alert = await this.alertCtrl.create({
+      header: 'Edit Chip',
+      inputs: [
+        {
+          name: 'name1',
+          type: 'text',
+          placeholder: 'Enter chip name',
+          handler: () => {}
+        }],
+      buttons: [{text: 'Cancel',
+                 role: 'cancel',
+                },
+                {text: 'OK',
+                 handler: (data) => {
+                  const input = data.name1;
+                  if (input.length > 0) { this.addChip(input); } else { return false; }
+                }
+
+                }],
+    });
+    await alert.present();
+
+  }
+  }
+
+  addChip(input) {
+    const idarray = [];
+    let newid = null;
+    this.options.forEach(obj => {
+      idarray.push(obj.id);
+    });
+    newid = Math.max(...idarray) + 1;
+    const chip = {
+      id: newid,
+      name: input
+    };
+
+    this.data.addItem(chip).subscribe(() => {
+      this.getData();
+   });
+  }
+
 }

@@ -1,36 +1,30 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { MatNativeDateModule, MatDatepickerModule, MatAutocompleteModule } from '@angular/material';
 
-import { HomePage } from './home.page';
+import { TimepopoverComponent } from './timepopover/timepopover.component';
+import { DatepickerComponent } from './datepicker.component';
 
-import { ChipselectComponentModule } from '../components/chipselect/chipselect.module';
-import { DatepickerComponentModule } from '../components/datepicker/datepicker.module';
+import { DatetimemaskDirective } from './directives/datetimemask.directive';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ChipselectComponentModule,
-    DatepickerComponentModule,
     ReactiveFormsModule,
     MatNativeDateModule,
     MatDatepickerModule,
     MatAutocompleteModule,
-    HttpClientModule,
     IonicModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HomePage
-      }
-    ])
+    RouterModule.forChild([])
   ],
-  declarations: [HomePage]
+  providers: [],
+  declarations: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective],
+  entryComponents: [DatepickerComponent, TimepopoverComponent],
+  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective],
 })
-export class HomePageModule {}
+export class DatepickerComponentModule {}
