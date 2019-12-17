@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
-import { MatNativeDateModule, MatDatepickerModule, MatAutocompleteModule } from '@angular/material';
+import { MatNativeDateModule, MatDatepickerModule, MatAutocompleteModule, MatIconModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 import { TimepopoverComponent } from './timepopover/timepopover.component';
 import { DatepickerComponent } from './datepicker.component';
@@ -20,11 +20,14 @@ import { DatetimemaskDirective } from './directives/datetimemask.directive';
     MatDatepickerModule,
     MatAutocompleteModule,
     IonicModule,
-    RouterModule.forChild([])
+    RouterModule.forChild([]),
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   declarations: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective],
   entryComponents: [DatepickerComponent, TimepopoverComponent],
-  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective],
+  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, MatIconModule, MatFormFieldModule, MatInputModule],
 })
-export class DatepickerComponentModule {}
+export class DatepickerComponentModule { }

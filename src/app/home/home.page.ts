@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
       eventStartDate: [''],
       eventEndDate: [''],
       chip_option: ['']
-      });
+    });
   }
 
   ngOnInit() {
@@ -35,4 +35,8 @@ export class HomePage implements OnInit {
     this.allday = ev.detail.checked;
   }
 
+  public Date(date: string) {    
+    let dt = new Date(date);
+    return dt;
+  }
 }
