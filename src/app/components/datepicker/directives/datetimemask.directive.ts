@@ -10,9 +10,13 @@ export class DatetimemaskDirective {
 @HostListener('ionInput', ['$event'])
 onKeyDown(event: any) {
 
+  console.log(event);
+
   const input = this.element.nativeElement.value;
 
   let ddmmtrimmed = input.replace(/[^0-9]/g, '');
+
+  console.log(ddmmtrimmed);
 
   if (ddmmtrimmed.length > 12) {
     ddmmtrimmed = ddmmtrimmed.substr(0, 12);
@@ -22,6 +26,7 @@ onKeyDown(event: any) {
 
   for (let i = 0; i < ddmmtrimmed.length; i += 2 ) {
   ddmm.push(ddmmtrimmed.substr(i, 2 ));
+  console.log(ddmm);
 }
 
   if (ddmm.length === 0 ) {

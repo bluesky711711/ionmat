@@ -1,0 +1,14 @@
+<div matAutocompleteOrigin #optionorigin="matAutocompleteOrigin">
+ 
+  </div>
+  
+  <input type="text" type="hidden" aria-label="Number"  [matAutocompleteConnectedTo]="optionorigin" [matAutocomplete]="optionauto" #optionAutoCompleteInput="matAutocompleteTrigger">
+  <mat-autocomplete #optionauto="matAutocomplete" (opened)="autoopened()" (closed)="autoclosed()">
+  
+   
+    <mat-option *ngFor="let o of options; index as i;">
+        {{o}}
+    
+    </mat-option>
+ 
+  </mat-autocomplete>

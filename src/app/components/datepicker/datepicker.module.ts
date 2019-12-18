@@ -8,7 +8,7 @@ import { MatNativeDateModule, MatDatepickerModule, MatAutocompleteModule } from 
 
 import { TimepopoverComponent } from './timepopover/timepopover.component';
 import { DatepickerComponent } from './datepicker.component';
-
+import { TimeautocompleteComponent } from './autocomplete/autocomplete.component';
 import { DatetimemaskDirective } from './directives/datetimemask.directive';
 
 @NgModule({
@@ -23,8 +23,8 @@ import { DatetimemaskDirective } from './directives/datetimemask.directive';
     RouterModule.forChild([])
   ],
   providers: [],
-  declarations: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective],
-  entryComponents: [DatepickerComponent, TimepopoverComponent],
-  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective],
+  declarations: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, TimeautocompleteComponent],
+  entryComponents: [DatepickerComponent, TimepopoverComponent, TimeautocompleteComponent],
+  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, TimeautocompleteComponent],
 })
 export class DatepickerComponentModule {}

@@ -31,3 +31,8 @@
       margin-bottom: 0px;
       margin-top: 0px;
   } 
+
+  .mat-calendar-body-cell-content.mat-calendar-body-selected {
+    background-color: springgreen !important;
+    color: #fff;
+}

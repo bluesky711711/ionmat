@@ -22,7 +22,9 @@ import { DatetimemaskDirective } from './components/datepicker/directives/dateti
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      mode: 'md'
+    }),
     AppRoutingModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(DbService),

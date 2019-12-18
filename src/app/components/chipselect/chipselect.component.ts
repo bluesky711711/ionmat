@@ -29,19 +29,31 @@ export class ChipselectComponent implements OnInit {
   showTracksSection: any;
 
   public hasOptions = false;
+  public showChild = false;
+  public removeAvailable = true;
   public selectedOptions = [];
+  public maxNumber: any;
+  public currentItem: any;
 
-  constructor(public chipservice: ChipserviceService) {}
+  public focus: boolean;
+
+  constructor(public chipservice: ChipserviceService) {
+    this.maxNumber = 3;
+  }
 
   ngOnInit() {
     this.chipservice.newSelectedOptions.next(this.selectedOptions);
     this.chipservice.newSelectedOptions.subscribe(selectedoptions => {
       this.selectedOptions = selectedoptions;
+      console.log(this.hasOptions);
     });
+    this.focus = false;
   }
-
+  ionViewWillLeave() {
+    this.showChild = false;
+  }
   selectPrediction(prediction) {
-   // this.selectedOption.emit(prediction);
+   this.selectedOption.emit(prediction);
   }
 
   open() {
@@ -49,32 +61,79 @@ export class ChipselectComponent implements OnInit {
   }
 
   addTrack(i) {
-  //  this.trackSelected.emit(i);
+    this.addTrackClicked.emit();
+    this.trackSelected.emit(i);
   }
 
   emitAddTrack() {
-  //  this.addTrackClicked.emit();
+   this.addTrackClicked.emit();
   }
 
-  searchOptions(ev) {
+  searchOptions(ev:any) {
+
     ev.stopPropagation();
     this.triggerAutocomplete();
   }
 
   triggerAutocomplete() {
-    this.child.open();
+     this.child.open();
   }
 
-  optionSelected(ev) {
-    this.selectedOptions.push(ev);
-    this.hasOptions = true;
-    this.chipservice.newSelectedOptions.next(this.selectedOptions);
+  optionSelected(ev: any) {
+
+    if(this.maxNumber === 1){
+      if(this.selectedOptions.length > 0){
+        console.log('current item', this.selectedOptions[0]);
+        this.currentItem = this.selectedOptions[0];
+      }
+      this.selectedOptions.pop();
+      this.removeAvailable = true;
+      this.selectedOptions.push(ev);
+      this.hasOptions = true;
+      this.chipservice.newSelectedOptions.next(this.selectedOptions);
+
+    }else if(this.selectedOptions.length === this.maxNumber){
+      this.removeAvailable = false;
+      return;
+    }else{
+      this.removeAvailable = true;
+      this.selectedOptions.push(ev);
+      this.hasOptions = true;
+      this.chipservice.newSelectedOptions.next(this.selectedOptions);
+    }
   }
 
-  optionRemoved(i) {
+  optionRemoved(i:any,item:any) {
+    this.options.push(item); 
     this.selectedOptions.splice(i, 1);
-    this.hasOptions = false;
+    if(this.selectedOptions.length === 0){
+      this.hasOptions = false;
+    }
     this.chipservice.newSelectedOptions.next(this.selectedOptions);
   }
+  addOptionClicked(){
+    this.addTrackClicked.emit();
+  }
+  removeSelection(ev:any){
 
+    if(!this.removeAvailable){
+      return;
+    }
+    // remove object
+    let removeIndex = this.options.map(function(item:any) { return item.id; }).indexOf(ev.id);
+    if(this.maxNumber == 1){
+      this.options.splice(removeIndex, 1);
+      if(this.currentItem){
+        this.options.push(this.currentItem);
+        this.currentItem  = null;
+      }
+
+    } else {
+      this.options.splice(removeIndex, 1);
+    }
+  }
+
+  toggleFocus() {
+    this.focus = !this.focus;
+  }
 }

@@ -1,7 +1,11 @@
-import { Component, Output, EventEmitter, Input, OnInit, OnChanges} from '@angular/core';
+import { Component, Output, EventEmitter, Input, OnInit, OnChanges, ViewChild} from '@angular/core';
 import { FormGroup, FormGroupDirective, ControlContainer} from '@angular/forms';
 
+import { MatAutocompleteTrigger } from '@angular/material';
+
 import { TimepopoverComponent } from './timepopover/timepopover.component';
+
+import { TimeautocompleteComponent } from './autocomplete/autocomplete.component';
 
 import { PopoverController } from '@ionic/angular';
 
@@ -25,6 +29,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
     date: any;
     time: any;
 
+    options: any;
+
     startdatetime: any;
     enddatetime: any;
 
@@ -35,6 +41,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
     pageoutput = '';
 
     timeincluded: boolean;
+
+    public focused: boolean;
 
     @Input() label: string;
     @Input() form: FormGroup;
@@ -52,10 +60,67 @@ export class DatepickerComponent implements OnInit, OnChanges {
     @Input() min: Date;
     @Input() max: Date;
 
+    @ViewChild('trackAutoCompleteInput', { read: MatAutocompleteTrigger, static: false })
+    @ViewChild(TimeautocompleteComponent, {static: false}) child;
+
+    trackAutoCompleteInput: MatAutocompleteTrigger;
+
     constructor(public popoverCtrl: PopoverController,
                 public forms: FormService) { }
 
                 ngOnInit() {
+
+                  this.options = [
+                    '00:00',
+                    '00:30',
+                    '01:00',
+                    '01:30',
+                    '02:00',
+                    '02:30',
+                    '03:00',
+                    '03:30',
+                    '04:00',
+                    '04:30',
+                    '05:30',
+                    '06:00',
+                    '06:30',
+                    '07:00',
+                    '07:30',
+                    '08:00',
+                    '09:00',
+                    '09:30',
+                    '10:00',
+                    '10:30',
+                    '11:00',
+                    '11:30',
+                    '12:00',
+                    '12:30',
+                    '13:00',
+                    '13:30',
+                    '14:00',
+                    '14:30',
+                    '15:00',
+                    '15:30',
+                    '16:00',
+                    '16:30',
+                    '17:00',
+                    '17:30',
+                    '18:00',
+                    '18:30',
+                    '19:00',
+                    '19:30',
+                    '20:00',
+                    '20:30',
+                    '21:00',
+                    '21:30',
+                    '22:00',
+                    '22:30',
+                    '23:00',
+                    '23:30'
+                  ];
+
+
+                  this.focused = false;
 
                   if (this.sourceNewEvent) {
                     this.from = 'DD/MM/YYYY HH:mm';
@@ -157,6 +222,7 @@ export class DatepickerComponent implements OnInit, OnChanges {
 
                 focus() {
                     this.pickerOpen = !this.pickerOpen;
+                    this.togglefocused();
 
                     if (this.control === 'eventStartDate') {
                       this.forms.newEndDate.subscribe(newdate => {
@@ -170,6 +236,19 @@ export class DatepickerComponent implements OnInit, OnChanges {
                       this.min = newdate;
                         });
                     }
+                  }
+
+                  togglefocused() {
+                    this.focused = !this.focused;
+                  }
+
+                  searchOptions(ev) {
+                    ev.stopPropagation();
+                    this.triggerAutocomplete();
+                  }
+
+                  triggerAutocomplete() {
+                    this.child.open();
                   }
 
                 async timesPopover(ev: any) {

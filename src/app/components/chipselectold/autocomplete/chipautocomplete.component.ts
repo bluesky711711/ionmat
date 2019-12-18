@@ -12,12 +12,10 @@ export class ChipautocompleteComponent implements OnInit {
 
   @Output() selectedOption = new EventEmitter<any>();
 
-  @Output() optionSelected = new EventEmitter<any>(); 
-  @Output() removeSelection = new EventEmitter<any>();
-  @Output() editOptionClicked = new EventEmitter<any>();
+  @Output() optionSelected = new EventEmitter<any>();
 
-  @Output() addTrackClicked = new EventEmitter<any>();
-  isOpen: boolean;
+  @Output() addOptionClicked = new EventEmitter<any>();
+
   @ViewChild('optionAutoCompleteInput', { read: MatAutocompleteTrigger, static: false })
 
   optionAutoCompleteInput: MatAutocompleteTrigger;
@@ -33,22 +31,16 @@ export class ChipautocompleteComponent implements OnInit {
   open() {
     this.optionAutoCompleteInput.openPanel();
   }
-  close(){
-    this.optionAutoCompleteInput.closePanel();
-  }
 
-  addOption(i:any) {
+  addOption(i) {
   // This adds option to a dialogue box
     this.optionSelected.emit(i);
-    // this.options.splice(i,1);
-    this.removeSelection.emit(i);
-     
   }
 
   emitAddOption() {
-    console.log('Edit Chip Clicked!');
+
     // This loads manage options page
-    this.addTrackClicked.emit();
+    this.addOptionClicked.emit();
   }
 
 }
