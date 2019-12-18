@@ -14,7 +14,9 @@ import { DbService } from './services/db.service';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+
 import { DatetimemaskDirective } from './components/datepicker/directives/datetimemask.directive';
+import { MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +30,14 @@ import { DatetimemaskDirective } from './components/datepicker/directives/dateti
     AppRoutingModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(DbService),
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule
+  ],
+  exports: [
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     StatusBar,
@@ -36,4 +46,4 @@ import { DatetimemaskDirective } from './components/datepicker/directives/dateti
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,4 +1,5 @@
 .backdrop {
+<<<<<<< HEAD
     // color: transparent;
     background-color: transparent;
     opacity: 0;
@@ -36,3 +37,36 @@
     background-color: springgreen !important;
     color: #fff;
 }
+=======
+  // color: transparent;
+  background-color: transparent;
+  opacity: 0;
+}
+
+input {
+  border: 0px solid transparent;
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.date {
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --padding-start: 4px;
+}
+
+.matinput {
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+}
+
+.item-buttons {
+  --margin-top: 0px;
+  --margin-bottom: 0px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+>>>>>>> 58466c88b668839e8a65107fc10af600a65d7fdf

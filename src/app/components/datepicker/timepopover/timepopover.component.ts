@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, NavParams } from '@ionic/angular';
+import { Data } from 'src/app/data';
 
 @Component({
   selector: 'app-timepopover',
@@ -9,61 +10,51 @@ import { PopoverController } from '@ionic/angular';
 export class TimepopoverComponent implements OnInit {
 
   public times;
+  public startTimeVal: number;
+  public endTimeVal: number;
+  public startDateVal: Date;
+  public endDateVal: Date;
+  public control: string;
 
-  constructor(public popCtrl: PopoverController) { }
+  constructor(public popCtrl: PopoverController, private navParams: NavParams) {
+    this.control = this.navParams.get('control');
+  }
 
   ngOnInit() {
-    this.times = [
-      '00:00',
-      '00:30',
-      '01:00',
-      '01:30',
-      '02:00',
-      '02:30',
-      '03:00',
-      '03:30',
-      '04:00',
-      '04:30',
-      '05:30',
-      '06:00',
-      '06:30',
-      '07:00',
-      '07:30',
-      '08:00',
-      '09:00',
-      '09:30',
-      '10:00',
-      '10:30',
-      '11:00',
-      '11:30',
-      '12:00',
-      '12:30',
-      '13:00',
-      '13:30',
-      '14:00',
-      '14:30',
-      '15:00',
-      '15:30',
-      '16:00',
-      '16:30',
-      '17:00',
-      '17:30',
-      '18:00',
-      '18:30',
-      '19:00',
-      '19:30',
-      '20:00',
-      '20:30',
-      '21:00',
-      '21:30',
-      '22:00',
-      '22:30',
-      '23:00',
-      '23:30'
-    ];
+    this.startTimeVal = Data.startTimeVal;
+    this.endTimeVal = Data.endTimeVal;
+    this.startDateVal = Data.startDateVal;
+    this.endDateVal = Data.endDateVal;
+    this.times = Data.times;
+  }
+
+  public check(time: any) {
+    if (this.startDateVal == undefined || this.endDateVal == undefined || this.startDateVal.toDateString() == this.endDateVal.toDateString()) {
+      if (this.control == "eventEndDate") {
+        if (this.startTimeVal == 0) {
+          return true;
+        } else {
+          if (time[0] > this.startTimeVal) {
+            return true;
+          }
+        }
+      } else if (this.control == "eventStartDate") {
+        if (this.endTimeVal == 0) {
+          return true;
+        } else {
+          if (time[0] < this.endTimeVal) {
+            return true;
+          }
+        }
+      }
+    } else {
+      return true;
+    }
+
+    return false;
   }
 
   async setTime(time) {
-      await this.popCtrl.dismiss(time);
+    await this.popCtrl.dismiss(time);
   }
 }
