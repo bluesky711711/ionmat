@@ -26,14 +26,8 @@ import { DatetimemaskDirective } from './directives/datetimemask.directive';
     MatInputModule
   ],
   providers: [],
-<<<<<<< HEAD
   declarations: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, TimeautocompleteComponent],
   entryComponents: [DatepickerComponent, TimepopoverComponent, TimeautocompleteComponent],
-  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, TimeautocompleteComponent],
-=======
-  declarations: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective],
-  entryComponents: [DatepickerComponent, TimepopoverComponent],
   exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, MatIconModule, MatFormFieldModule, MatInputModule],
->>>>>>> 58466c88b668839e8a65107fc10af600a65d7fdf
 })
 export class DatepickerComponentModule { }

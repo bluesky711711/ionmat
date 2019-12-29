@@ -35,7 +35,7 @@ export class HomePage implements OnInit {
     this.allday = ev.detail.checked;
   }
 
-  public Date(date: string) {    
+  public Date(date: string) {
     let dt = new Date(date);
     return dt;
   }

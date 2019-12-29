@@ -15,40 +15,8 @@ export class DatetimemaskDirective {
   constructor(private element: ElementRef, private dtPicker: DatepickerComponent) {
   }
 
-<<<<<<< HEAD
-  console.log(event);
-
-  const input = this.element.nativeElement.value;
-
-  let ddmmtrimmed = input.replace(/[^0-9]/g, '');
-
-  console.log(ddmmtrimmed);
-
-  if (ddmmtrimmed.length > 12) {
-    ddmmtrimmed = ddmmtrimmed.substr(0, 12);
-  }
-
-  const ddmm = [];
-
-  for (let i = 0; i < ddmmtrimmed.length; i += 2 ) {
-  ddmm.push(ddmmtrimmed.substr(i, 2 ));
-  console.log(ddmm);
-}
-
-  if (ddmm.length === 0 ) {
-    this.element.nativeElement.value = '';
-  }
-
-  if (ddmm.length === 1) {
-    this.element.nativeElement.value = ddmm[0];
-  }
-
-  if (ddmm.length === 2) {
-    this.element.nativeElement.value = ddmm[0] + '/' + ddmm[1];
-=======
   @HostListener('ionInput', ['$event'])
   onKeyDown(event: any) {
-    debugger;
     if (this.dtPicker.control === 'eventStartDate') {
       Data.startTimeVal = 0;
     } else if (this.dtPicker.control === 'eventEndDate') {
@@ -128,6 +96,5 @@ export class DatetimemaskDirective {
         }
       });
     }
->>>>>>> 58466c88b668839e8a65107fc10af600a65d7fdf
   }
 }
