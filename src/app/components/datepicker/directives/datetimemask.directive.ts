@@ -17,6 +17,7 @@ export class DatetimemaskDirective {
 
   @HostListener('ionInput', ['$event'])
   onKeyDown(event: any) {
+    debugger;
     if (this.dtPicker.control === 'eventStartDate') {
       Data.startTimeVal = 0;
     } else if (this.dtPicker.control === 'eventEndDate') {

@@ -28,6 +28,6 @@ import { DatetimemaskDirective } from './directives/datetimemask.directive';
   providers: [],
   declarations: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, TimeautocompleteComponent],
   entryComponents: [DatepickerComponent, TimepopoverComponent, TimeautocompleteComponent],
-  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, MatIconModule, MatFormFieldModule, MatInputModule],
+  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, TimeautocompleteComponent, MatIconModule, MatFormFieldModule, MatInputModule],
 })
 export class DatepickerComponentModule { }

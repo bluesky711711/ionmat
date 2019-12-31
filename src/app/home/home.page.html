@@ -10,45 +10,31 @@
 </ion-header>
 
 <ion-content class="ion-no-padding">
-    <ion-list-header color="light">Chip picker</ion-list-header>
-    <ion-item>
-        <ion-label position="stacked">Standard List item w/input</ion-label>
-        <ion-input></ion-input>
-    
-      </ion-item>
-              <app-chipselect [options]="options"></app-chipselect>
-              <ion-item>
-                  <ion-label position="stacked">Standard List item w/input</ion-label>
-                  <ion-input></ion-input>
-              
-                </ion-item>
-                <ion-list-header color="light">Date picker</ion-list-header>
-                <ion-item lines="full">
-                    <ion-label>All day</ion-label>
-                    <ion-checkbox slot="start" (ionChange)="allDayToggle($event)"></ion-checkbox>
-                </ion-item>
-                
-                <!-- Available Colors: primary, accent, warn -->
-                <!-- Min & Max date should be in MM/DD/YYYY || [min]="Date('12/05/2019')" || [max]="Date('12/25/2019')" -->
-                <app-datepicker [label]="'From'"
-                [color]="'warn'"                
-                [value]=""
-                [includeTime]="!allday"
-                [form]="form"
-                [control]="'eventStartDate'"
-                [datetimeFrom]="true"
-                [min]="Date('12/05/2018')"
-                ></app-datepicker>
+  <ion-list-header color="light">Chip picker</ion-list-header>
+  <ion-item>
+    <ion-label position="stacked">Standard List item w/input</ion-label>
+    <ion-input></ion-input>
 
-                <app-datepicker [label]="'To'"
-                [color]="'accent'"                
-                [value]=""
-                [includeTime]="!allday"
-                [form]="form"
-                [control]="'eventEndDate'"
-                [datetimeTo]="true"
-                [max]="Date('12/25/2019')"
-                ></app-datepicker>
+  </ion-item>
+  <app-chipselect [options]="options"></app-chipselect>
+  <ion-item>
+    <ion-label position="stacked">Standard List item w/input</ion-label>
+    <ion-input></ion-input>
 
-  
+  </ion-item>
+  <ion-list-header color="light">Date picker</ion-list-header>
+  <ion-item lines="full">
+    <ion-label>All day</ion-label>
+    <ion-checkbox slot="start" (ionChange)="allDayToggle($event)"></ion-checkbox>
+  </ion-item>
+
+  <!-- Available Colors: primary, accent, warn -->
+  <!-- Min & Max date should be in MM/DD/YYYY || [min]="Date('12/05/2019')" || [max]="Date('12/25/2019')" -->
+  <app-datepicker [label]="'From'" [color]="'warn'" [value]="" [includeTime]="!allday" [form]="form"
+    [control]="'eventStartDate'" [datetimeFrom]="true"></app-datepicker>
+
+  <app-datepicker [label]="'To'" [color]="'accent'" [value]="" [includeTime]="!allday" [form]="form"
+    [control]="'eventEndDate'" [datetimeTo]="true"></app-datepicker>
+
+
 </ion-content>
