@@ -21,7 +21,7 @@
   </ion-buttons>
 
 
-  <mat-datepicker #picker [color]="primary" (closed)='focus()' (opened)='focus()'></mat-datepicker>
+  <mat-datepicker #picker [color]="'primary'" (closed)='focus()' (opened)='focus()'></mat-datepicker>
   <input [(ngModel)]="datePickerVal" class="matinput" [min]='min' [max]='max' [matDatepicker]="picker"
     (dateChange)="dateEntered($event, 'picker')" size="0">
 </ion-item>

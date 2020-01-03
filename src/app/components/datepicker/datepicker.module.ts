@@ -10,6 +10,7 @@ import { TimepopoverComponent } from './timepopover/timepopover.component';
 import { DatepickerComponent } from './datepicker.component';
 import { TimeautocompleteComponent } from './autocomplete/autocomplete.component';
 import { DatetimemaskDirective } from './directives/datetimemask.directive';
+import { TimeautocompleteModule } from './autocomplete/autocomplete.module';
 
 @NgModule({
   imports: [
@@ -23,11 +24,12 @@ import { DatetimemaskDirective } from './directives/datetimemask.directive';
     RouterModule.forChild([]),
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    TimeautocompleteModule,
   ],
   providers: [],
-  declarations: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, TimeautocompleteComponent],
-  entryComponents: [DatepickerComponent, TimepopoverComponent, TimeautocompleteComponent],
-  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, TimeautocompleteComponent, MatIconModule, MatFormFieldModule, MatInputModule],
+  declarations: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective],
+  entryComponents: [DatepickerComponent, TimepopoverComponent],
+  exports: [DatepickerComponent, TimepopoverComponent, DatetimemaskDirective, MatIconModule, MatFormFieldModule, MatInputModule],
 })
 export class DatepickerComponentModule { }
