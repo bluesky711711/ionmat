@@ -1,7 +1,7 @@
 <ion-item [class.item-has-focus]="focused">
   <ion-label position="stacked">{{label}}<ion-text color="danger"> *</ion-text>
   </ion-label>
-  <ion-input *ngIf="!useIonDateTime" [value]='pageoutput' readonly="true" [placeholder]="placeholder"
+  <ion-input *ngIf="!useIonDateTime" [value]='pageoutput' [placeholder]="placeholder" appDatetimemask
     (ionBlur)="checkBlur()">
   </ion-input>
   <ion-datetime *ngIf="useIonDateTime" [(ngModel)]="dateTimeVal" (click)="ionFocus()"
