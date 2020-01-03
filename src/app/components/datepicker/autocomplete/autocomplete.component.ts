@@ -36,7 +36,6 @@ export class TimeautocompleteComponent implements OnInit {
   // public endDateVal: Date;
 
   ngOnInit() {
-    debugger;
     // this.startTimeVal = Data.startTimeVal;
     // this.endTimeVal = Data.endTimeVal;
     // this.startDateVal = Data.startDateVal;
@@ -71,7 +70,6 @@ export class TimeautocompleteComponent implements OnInit {
   }
 
   optionSelected(event) {
-    debugger;
     this.timeSelected.emit(event.option.value);
   }
 

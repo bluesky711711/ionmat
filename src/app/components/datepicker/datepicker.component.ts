@@ -618,7 +618,6 @@ export class DatepickerComponent implements OnInit, OnChanges {
   }
 
   public getFormattedDate(inputDate: any, isMin: boolean) {
-    debugger;
     if (inputDate != undefined && inputDate != '' && isDate(inputDate)) {
       let inDt = new Date();
       if (!this.includeTime) {

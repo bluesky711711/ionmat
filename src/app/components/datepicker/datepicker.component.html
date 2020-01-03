@@ -21,7 +21,7 @@
   </ion-buttons>
 
 
-  <mat-datepicker #picker [color]="color" (closed)='focus()' (opened)='focus()'></mat-datepicker>
+  <mat-datepicker #picker [color]="primary" (closed)='focus()' (opened)='focus()'></mat-datepicker>
   <input [(ngModel)]="datePickerVal" class="matinput" [min]='min' [max]='max' [matDatepicker]="picker"
     (dateChange)="dateEntered($event, 'picker')" size="0">
 </ion-item>
@@ -29,7 +29,7 @@
 <ion-grid class="ion-no-padding">
   <ion-row class="ion-no-padding">
     <ion-col class="ion-no-padding">
-      <app-timeautocomplete [control]="control" (timeSelected)="timeSelected($event)" (opened)="checkFocus"
+      <app-timeautocomplete [control]="control" (timeSelected)="timeSelected($event)" (opened)="checkFocus()"
         (closed)="checkBlur()"></app-timeautocomplete>
     </ion-col>
   </ion-row>
