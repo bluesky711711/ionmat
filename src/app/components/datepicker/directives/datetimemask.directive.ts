@@ -1,8 +1,9 @@
-import { Directive, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Directive, HostListener, ElementRef, ViewChild, Renderer2, Input } from '@angular/core';
 import { isDate } from 'date-fns';
 import { Data } from 'src/app/data';
 import { DatepickerComponent } from 'src/app/components/datepicker/datepicker.component';
 import { TimepopoverComponent } from '../timepopover/timepopover.component';
+import { IonInput } from '@ionic/angular';
 
 @Directive({
   selector: '[appDatetimemask]'
@@ -11,13 +12,50 @@ export class DatetimemaskDirective {
   public validInputDate: Date;
   public validInputTime: string;
   public validInputTimeVal: number;
+  private currentValue = '';
+
+  //Mu'men Tayyem
+
+  @Input() isAllDay;
+
+  //Mu'men Tayyem
 
   constructor(private element: ElementRef, private dtPicker: DatepickerComponent) {
   }
 
   @HostListener('ionInput', ['$event'])
   onKeyDown(event: any) {
-    debugger;
+
+    //Mu'men Tayyem
+
+    let tokens = event.target.value.split('/');
+    if (tokens.length==3 && event.target.value.length>=10){
+      let days = tokens[0];
+      let months = tokens[1]-1;
+      let years = tokens[2];
+
+      if (days>0 && days<32 && months>=0 && months<12){
+       
+      }else{
+        setTimeout(() => {
+          (event.target as IonInput).value = 'Invalid Date!';
+        }, 10);
+      }
+    }
+
+    let lastCharInserted = event.detail.data;
+    if (isNaN(lastCharInserted)) {
+      if (lastCharInserted != ' ') {
+        setTimeout(() => {
+          (event.target as IonInput).value = this.currentValue;
+        }, 10);
+        return;
+      }
+    }
+
+    //Mu'men Tayyem
+
+
     if (this.dtPicker.control === 'eventStartDate') {
       Data.startTimeVal = 0;
     } else if (this.dtPicker.control === 'eventEndDate') {
@@ -25,6 +63,8 @@ export class DatetimemaskDirective {
     }
 
     const input = this.element.nativeElement.value;
+
+
 
     let ddmmtrimmed = input.replace(/[^0-9]/g, '');
 
@@ -61,7 +101,7 @@ export class DatetimemaskDirective {
         let formattedDate: Date = new Date(formattedDateString);
         if (isDate(formattedDate)) {
           this.validInputDate = formattedDate;
-          debugger;
+          ;
           this.dtPicker.datePickerVal = this.validInputDate;
           if (this.dtPicker.control === 'eventStartDate') {
             Data.startDateVal = this.validInputDate;
@@ -97,5 +137,7 @@ export class DatetimemaskDirective {
         }
       });
     }
+
+    this.currentValue = this.element.nativeElement.value;
   }
 }
