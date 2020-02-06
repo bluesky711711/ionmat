@@ -1,4 +1,4 @@
-import { Component, ViewChild, ChangeDetectorRef, Input, EventEmitter, Output, OnInit, ElementRef } from '@angular/core';
+import { Component, ViewChild, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { MatAutocompleteTrigger } from '@angular/material';
 
 import { ChipautocompleteComponent } from './autocomplete/chipautocomplete.component';
@@ -13,8 +13,6 @@ import { ChipserviceService } from './chipservice.service';
 export class ChipselectComponent implements OnInit {
 
   @Input() options: Array<string>;
-
-  @Input() maxNumber: number = 3;
 
   @Output() selectedOption = new EventEmitter<any>();
 
@@ -34,12 +32,13 @@ export class ChipselectComponent implements OnInit {
   public showChild = false;
   public removeAvailable = true;
   public selectedOptions = [];
+  public maxNumber: any;
   public currentItem: any;
 
-  focus: boolean;
+  public focus: boolean;
 
-  constructor(public chipservice: ChipserviceService, private changeDetector: ChangeDetectorRef) {
-
+  constructor(public chipservice: ChipserviceService) {
+    this.maxNumber = 3;
   }
 
   ngOnInit() {
@@ -51,7 +50,7 @@ export class ChipselectComponent implements OnInit {
     this.focus = false;
   }
   ionViewWillLeave() {
-    this.child.close();
+    this.showChild = false;
   }
   selectPrediction(prediction) {
    this.selectedOption.emit(prediction);
@@ -71,6 +70,7 @@ export class ChipselectComponent implements OnInit {
   }
 
   searchOptions(ev:any) {
+
     ev.stopPropagation();
     this.triggerAutocomplete();
   }
@@ -134,30 +134,6 @@ export class ChipselectComponent implements OnInit {
   }
 
   toggleFocus() {
-    this.showChild = !this.showChild;
+    this.focus = !this.focus;
   }
-
-  openCloseOptions(event) {
-    event.stopPropagation();
-    if (this.showChild) {
-      this.child.close();
-    } else {
-      this.child.open();
-    }
-  }
-
-  openCloseChild(b: boolean) {
-    if (b == false) {
-      window.setTimeout(()=> {
-        this.showChild = false;
-        this.changeDetector.detectChanges();
-      }, 100)
-
-    } else {
-      this.showChild = b;
-    }
-    
-    this.changeDetector.detectChanges();
-  }
-
 }

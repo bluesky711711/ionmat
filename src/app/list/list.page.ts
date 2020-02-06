@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -11,11 +13,13 @@ import { DataService } from '../services/data.service';
 export class ListPage implements OnInit {
 
   public options: any;
+  public reorder: boolean;
 
   constructor(private data: DataService, public alertCtrl: AlertController) {}
 
   ngOnInit() {
     this.getData();
+    this.reorder = false;
   }
 
   getData() {
@@ -94,6 +98,14 @@ export class ListPage implements OnInit {
     this.data.addItem(chip).subscribe(() => {
       this.getData();
    });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.options, event.previousIndex, event.currentIndex);
+   }
+
+   toggleReorder() {
+    this.reorder = !this.reorder;
   }
 
 }

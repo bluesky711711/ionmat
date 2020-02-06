@@ -1,59 +1,97 @@
-import { Directive, HostListener, ElementRef } from '@angular/core';
-
+import { Directive, HostListener, ElementRef, Input } from '@angular/core';
 
 @Directive({
-  selector: '[appDatetimemask]'
+  selector: '[appDatetimemask]',
 })
 export class DatetimemaskDirective {
+  @Input('appDatetimemask') maskType: string; // 'dateonly' or 'datetime'
 
-  constructor(private element: ElementRef) {
-    console.log(this.element);
-  }
-@HostListener('ionInput', ['$event'])
+  includeTime: boolean;
+
+  constructor(private element: ElementRef) {}
+
+
+@HostListener('keydown', ['$event'])
 onKeyDown(event: any) {
 
-  const input = this.element.nativeElement.value;
-
-  let ddmmtrimmed = input.replace(/[^0-9]/g, '');
-
-  if (ddmmtrimmed.length > 12) {
-    ddmmtrimmed = ddmmtrimmed.substr(0, 12);
+  if (['ArrowLeft', 'ArrowRight', 'Tab'].indexOf(event.key) > -1) {
+    return;
   }
 
-  const ddmm = [];
+  if ( ['Backspace', '0','1','2','3','4','5','6','7','8','9'].indexOf(event.key) > -1) {
 
-  for (let i = 0; i < ddmmtrimmed.length; i += 2 ) {
-  ddmm.push(ddmmtrimmed.substr(i, 2 ));
+    this.includeTime = this.maskType === 'dateonly' ? false : true;
+    let input = this.element.nativeElement.value;
+
+    if (event.key === 'Backspace') {
+      if (input.length > 0) {
+        const lastchar = input.substr(input.length - 1, 1);
+        if (lastchar === '/' || lastchar === ' ' || lastchar === ':') {
+          this.element.nativeElement.value = input.substring(0, input.length - 2);
+        } else {
+          this.element.nativeElement.value = input.substring(0, input.length - 1);
+        }
+        event.preventDefault();
+      }
+    } else {
+      if ((!this.includeTime && input.length === 10) || (this.includeTime && input.length === 16)) {
+        event.preventDefault();
+        return;
+      } else {
+        input = input + event.key;
+      }
+    }
+
+    if (input.length === 2 && event.key !== 'Backspace') {
+      const day = parseInt(input);
+
+      if (day > 31 || day === 0) {
+        this.element.nativeElement.value = '';
+      } else {
+        this.element.nativeElement.value = input + '/';
+        event.preventDefault();
+      }
+    } else if (input.length === 5) {
+      const month = parseInt(input.substring(3,5));
+      if (month > 12) {
+        this.element.nativeElement.value = input.substring(0,3);
+        event.preventDefault();
+      } else {
+        this.element.nativeElement.value = input + '/';
+        event.preventDefault();
+      }
+    } else if (input.length == 10) {
+      if (this.includeTime) {
+        this.element.nativeElement.value = input + ' ';
+        event.preventDefault();
+      }
+    } else if (input.length == 13) {
+      const hour = parseInt(input.substring(11,13));
+      if (hour > 23) {
+        this.element.nativeElement.value = input.substring(0, 11);
+        event.preventDefault();
+      } else {
+        this.element.nativeElement.value = input + ':';
+        event.preventDefault();
+      }
+    } else if (input.length === 16) {
+      const min = parseInt(input.substring(14,16));
+      if (min > 59) {
+        this.element.nativeElement.value = input.substring(0,14);
+        event.preventDefault();
+      } else {
+
+      }
+    }
+
+  } else {
+    event.preventDefault();
+  }
+
+
 }
 
-  if (ddmm.length === 0 ) {
-    this.element.nativeElement.value = '';
-  }
-
-  if (ddmm.length === 1) {
-    this.element.nativeElement.value = ddmm[0];
-  }
-
-  if (ddmm.length === 2) {
-    this.element.nativeElement.value = ddmm[0] + '/' + ddmm[1];
-  }
-
-  if (ddmm.length === 3) {
-    this.element.nativeElement.value = ddmm[0] + '/' + ddmm[1] + '/' + ddmm[2];
-  }
-
-  if (ddmm.length === 4) {
-    this.element.nativeElement.value = ddmm[0] + '/' + ddmm[1] + '/' + ddmm[2] + ddmm[3];
-  }
-
-  if (ddmm.length === 5) {
-    this.element.nativeElement.value = ddmm[0] + '/' + ddmm[1] + '/' + ddmm[2] + ddmm[3] + ' ' + ddmm[4];
-  }
-
-  if (ddmm.length === 6) {
-    this.element.nativeElement.value = ddmm[0] + '/' + ddmm[1] + '/' + ddmm[2] + ddmm[3] + ' ' + ddmm[4] + ':' + ddmm[5];
-  }
-
 }
 
-}
+
+

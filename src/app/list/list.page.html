@@ -6,6 +6,9 @@
     <ion-title>
       Data
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="toggleReorder()"><ion-icon name="reorder" slot="end"></ion-icon>Reorder</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -18,11 +21,16 @@
   
 
   </ion-item>
-  <ion-item *ngFor="let o of options"> 
-    <ion-button shape="round" slot="end" color="danger" fill="clear" (click)="deleteChip(o)"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button> 
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <ng-container *ngFor="let o of options">
+  <ion-item class="example-box" cdkDrag [cdkDragDisabled]="!reorder"> 
+    <ion-button *ngIf="!reorder" shape="round" slot="end" color="danger" fill="clear" (click)="deleteChip(o)"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button> 
+    <ion-button *ngIf="reorder" [disabled]="true" shape="round" slot="end" color="dark" fill="clear"><ion-icon slot="icon-only" name="reorder"></ion-icon></ion-button>
     {{ o.name }}
 
   </ion-item>
+</ng-container>
+</div>
   
     <ion-button fill="clear" expand="block" (click)="presentAlert('new')">Add chip</ion-button>
 

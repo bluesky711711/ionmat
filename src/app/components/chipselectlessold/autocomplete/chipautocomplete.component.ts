@@ -12,22 +12,19 @@ export class ChipautocompleteComponent implements OnInit {
 
   @Output() selectedOption = new EventEmitter<any>();
 
-  @Output() optionSelected = new EventEmitter<any>();
+  @Output() optionSelected = new EventEmitter<any>(); 
   @Output() removeSelection = new EventEmitter<any>();
   @Output() editOptionClicked = new EventEmitter<any>();
 
   @Output() addTrackClicked = new EventEmitter<any>();
-
-  @Output() panelClosed = new EventEmitter<any>();
-  @Output() panelOpened = new EventEmitter<any>();
-
   isOpen: boolean;
-  @ViewChild('optionAutoCompleteInput', { read: MatAutocompleteTrigger, static: false }) optionAutoCompleteInput: MatAutocompleteTrigger;
+  @ViewChild('optionAutoCompleteInput', { read: MatAutocompleteTrigger, static: false })
+
+  optionAutoCompleteInput: MatAutocompleteTrigger;
 
   showTracksSection: any;
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   selectPrediction(prediction) {
     this.selectedOption.emit(prediction);
@@ -38,12 +35,6 @@ export class ChipautocompleteComponent implements OnInit {
   }
   close(){
     this.optionAutoCompleteInput.closePanel();
-  }
-  onPanelOpened() {
-    this.panelOpened.emit();
-  }
-  onPanelClosed() {
-    this.panelClosed.emit();
   }
 
   addOption(i:any) {

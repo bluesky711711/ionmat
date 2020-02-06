@@ -1,21 +1,15 @@
-<div matAutocompleteOrigin #optionorigin="matAutocompleteOrigin" ></div>
+<div matAutocompleteOrigin #optionorigin="matAutocompleteOrigin">
+ 
+  </div>
   
   <input aria-label="Number" 
-        [matAutocompleteConnectedTo]="optionorigin"        
+         [matAutocompleteConnectedTo]="optionorigin" 
          [matAutocomplete]="optionauto" 
          #optionAutoCompleteInput="matAutocompleteTrigger" 
          style="border:none;visibility:hidden;"
          type="hidden">
-
-
-
   
-  <mat-autocomplete #optionauto="matAutocomplete"
-                    (closed)="onPanelClosed()"
-                    (opened)="onPanelOpened()"
-                    cdkOverlayOrigin
-                    #trigger="cdkOverlayOrigin"
-                    >
+  <mat-autocomplete #optionauto="matAutocomplete">
     <ion-grid class="ion-no-padding" *ngIf="options">
       <ion-row class="ion-no-padding">
         <ion-col>
@@ -34,5 +28,3 @@
     </mat-option>
  
   </mat-autocomplete>
-
-

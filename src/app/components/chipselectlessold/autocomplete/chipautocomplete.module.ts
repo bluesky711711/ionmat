@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { ChipautocompleteComponent } from './chipautocomplete.component';
 
 import { MatInputModule, MatAutocompleteModule } from '@angular/material';
-import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -21,7 +20,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
-    OverlayModule
   ],
   exports: [
     ChipautocompleteComponent

@@ -2,14 +2,15 @@
     position: relative; /* Sit on top of the page content */
   }
 
-.chip {
-    position: absolute;
+.chip-container {
+    //position: absolute;
     z-index: 999;
     top: 0px;
     left: 0px;
+    max-width: 100%;
+    .chip {
+        position: relative;
+        max-width: calc(100% - 4px);
+    }
 
-}
-
-.height {
-    height: 48px;
 }

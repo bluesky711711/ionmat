@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { TimepopoverComponent } from './timepopover.component';
+import { ChipselectComponent } from './chipselect.component';
 
-describe('TimepopoverComponent', () => {
-  let component: TimepopoverComponent;
-  let fixture: ComponentFixture<TimepopoverComponent>;
+describe('ChipselectComponent', () => {
+  let component: ChipselectComponent;
+  let fixture: ComponentFixture<ChipselectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimepopoverComponent ],
+      declarations: [ ChipselectComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(TimepopoverComponent);
+    fixture = TestBed.createComponent(ChipselectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

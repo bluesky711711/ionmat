@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class FormService {
+export class DatePickerService {
 
   public startdate: Date;
   public enddate: Date;
@@ -13,5 +13,11 @@ export class FormService {
   public newStartDate: BehaviorSubject<Date> = new BehaviorSubject<Date>(this.startdate);
   public newEndDate: BehaviorSubject<Date> = new BehaviorSubject<Date>(this.enddate);
 
-  constructor() { }
+  public starttimestamp: number;
+  public endtimestamp: number;
+
+  public newStartTimestamp: BehaviorSubject<number> = new BehaviorSubject<number>(this.starttimestamp);
+  public newEndTimestamp: BehaviorSubject<number> = new BehaviorSubject<number>(this.endtimestamp);
+
+  constructor() {}
 }

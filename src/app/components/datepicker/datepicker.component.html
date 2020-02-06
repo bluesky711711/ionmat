@@ -1,63 +1,63 @@
 <ion-item [class.item-has-focus]="focused">
   <ion-label position="stacked">{{label}}<ion-text color="danger"> *</ion-text>
   </ion-label>
-  <ion-input *ngIf="!useIonDateTime" [value]='pageoutput' [placeholder]="placeholder" appDatetimemask
-    (ionBlur)="checkBlur()">
-  </ion-input>
-  <ion-datetime *ngIf="useIonDateTime" [(ngModel)]="dateTimeVal" (click)="ionFocus()"
-    (ionChange)="ionDateEntered($event, '')" [displayFormat]="ionDisplayFormat" [min]="ionMin" [max]="ionMax"
-    [placeholder]="placeholder" [hourValues]="hourValues" [minuteValues]="minuteValues">
-  </ion-datetime>
-  <!-- <ion-input [value]='pageoutput' [readonly]="!includeTime" [placeholder]="placeholder" appDatetimemask
-    [class.has-focus]="focused">
-  </ion-input> -->
-  <ion-buttons *ngIf="!useIonDateTime" slot="end" class="item-buttons">
+  <ion-input *ngIf="!useIonDateTime"
+              [value]='pageoutput'
+              [appDatetimemask]="includeTime?'datetime':'dateonly'"
+              [placeholder]="placeholder"
+              (ionBlur)="checkBlur($event)"
+              ></ion-input>
+
+<!-- Show picker on mobile viewports -->
+
+<ion-datetime *ngIf="useIonDateTime"
+              [value]="ionPageOutput"
+              (ionChange)="dateEntered($event, 'iondatetime')"
+              (ionFocus)="focus()"
+              [displayFormat]="ionDisplayFormat"
+              [min]="ionMin"
+              [max]="ionMax"
+              [placeholder]="placeholder"
+              [hourValues]="hourValues"
+              ></ion-datetime>
+
+<!-- Input buttons -->
+<!-- Date -->
+
+<ion-buttons *ngIf="!useIonDateTime" slot="end" class="item-buttons">
     <ion-button fill="clear" shape="round" (click)="picker.open()">
       <ion-icon slot="icon-only" color="primary" name="calendar"></ion-icon>
     </ion-button>
+
+<!-- Time -->
+
     <ion-button *ngIf="includeTime" fill="clear" shape="round" (click)="searchOptions($event)">
       <ion-icon slot="icon-only" color="primary" name="time"></ion-icon>
     </ion-button>
   </ion-buttons>
 
-
-  <mat-datepicker #picker [color]="'primary'" (closed)='focus()' (opened)='focus()'></mat-datepicker>
-  <input [(ngModel)]="datePickerVal" class="matinput" [min]='min' [max]='max' [matDatepicker]="picker"
+<!-- Datepicker -->
+  <mat-datepicker #picker
+                  [color]="'primary'"
+                  (closed)='focus()'
+                  (opened)='focus()'
+                  >
+  </mat-datepicker>
+  <input class="matinput" [min]="min" [max]="max" [matDatepicker]="picker"
     (dateChange)="dateEntered($event, 'picker')" size="0">
+
 </ion-item>
+
+<!-- Timepicker -->
 
 <ion-grid class="ion-no-padding">
   <ion-row class="ion-no-padding">
     <ion-col class="ion-no-padding">
-      <app-timeautocomplete [control]="control" (timeSelected)="timeSelected($event)" (opened)="checkFocus()"
-        (closed)="checkBlur()"></app-timeautocomplete>
+      <app-timeautocomplete [control]="control"
+                            (timeSelected)="timeSelected($event)"
+                            (opened)="checkFocus()"
+                            (closed)="checkBlur()"
+                            ></app-timeautocomplete>
     </ion-col>
   </ion-row>
 </ion-grid>
-
-<!-- <ion-item>
-  <ion-buttons slot="start" class="item-buttons">
-    <ion-button *ngIf="!useIonDateTime" fill="clear" shape="round" (click)="picker.open()">
-      <ion-icon slot="icon-only" name="calendar"></ion-icon>
-    </ion-button>
-    <ion-button *ngIf="useIonDateTime" fill="clear" shape="round" (click)="newpicker.open(); focus();">
-      <ion-icon slot="icon-only" name="calendar"></ion-icon>
-    </ion-button>
-    <ion-button *ngIf="includeTime" fill="clear" shape="round" (click)="timesPopover($event)">
-      <ion-icon slot="icon-only" name="time"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <ion-label position="stacked">{{label}}<ion-text color="danger"> *</ion-text>
-  </ion-label>
-  <ion-input [value]="pageoutput" [readonly]="!includeTime" [placeholder]="placeholder" appDatetimemask>
-  </ion-input>
-
-  <mat-datepicker #picker [color]="color" (closed)="focus()" (opened)="focus()">
-  </mat-datepicker>
-  <input class="matinput" [min]="min" [max]="max" [matDatepicker]="picker" [(ngModel)]="datePickerVal"
-    (dateChange)="dateEntered($event, 'picker')" size="0">
-
-  <ion-datetime #newpicker [(ngModel)]="datePickerVal" (ionChange)="dateEntered($event, 'newpicker')"
-    [min]="getFormattedDate(min, true)" [max]="getFormattedDate(max, false)" style="display: none;">
-  </ion-datetime>
-</ion-item> -->

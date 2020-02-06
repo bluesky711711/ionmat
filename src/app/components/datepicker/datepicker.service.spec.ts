@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { FormService } from './form.service';
+import { DatePickerService } from './datepicker.service';
 
-describe('FormService', () => {
+describe('DatePickerService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: FormService = TestBed.get(FormService);
+    const service: DatePickerService = TestBed.get(DatePickerService);
     expect(service).toBeTruthy();
   });
 });
