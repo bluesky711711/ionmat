@@ -7,12 +7,16 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { ListPage } from './list.page';
 
+import { ScrollDetectorDirective } from '../directives/scroll-detector.directive';
+import { DragScrollModule } from 'cdk-drag-scroll';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     DragDropModule,
+    DragScrollModule,
     RouterModule.forChild([
       {
         path: '',
@@ -20,6 +24,6 @@ import { ListPage } from './list.page';
       }
     ])
   ],
-  declarations: [ListPage]
+  declarations: [ListPage, ScrollDetectorDirective]
 })
 export class ListPageModule {}
