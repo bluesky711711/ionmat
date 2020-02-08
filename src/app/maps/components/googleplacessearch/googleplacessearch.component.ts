@@ -2,7 +2,7 @@ import { Component, OnInit, ElementRef, ViewChild, NgZone, Input, AfterViewInit 
 import { FormGroup } from '@angular/forms';
 
 import { GooglemapsService } from '../../../services/googlemaps.service';
-import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
+import { MapsautocompleteComponent } from '../autocomplete/autocomplete.component';
 
 declare var google: any;
 
@@ -18,7 +18,7 @@ export class GoogleplacessearchComponent implements OnInit, AfterViewInit {
 
   @ViewChild('addresstext', {static: false}) addresstext: ElementRef;
   @ViewChild('pleaseConnect', {static: false}) pleaseConnect: ElementRef;
-  @ViewChild(AutocompleteComponent, {static: false}) child;
+  @ViewChild(MapsautocompleteComponent, {static: false}) child;
 
   triggerAutocomplete() {
     this.child.open('autoCompleteInput');

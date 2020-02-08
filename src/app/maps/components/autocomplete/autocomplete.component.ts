@@ -7,7 +7,7 @@ import { MatAutocompleteTrigger } from '@angular/material';
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
 })
-export class AutocompleteComponent implements OnInit {
+export class MapsautocompleteComponent implements OnInit {
 
   @Input() predictions: Array<any>;
 

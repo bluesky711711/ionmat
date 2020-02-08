@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AutocompleteComponent } from './autocomplete.component';
+import { MapsautocompleteComponent } from './autocomplete.component';
 
 describe('AutocompleteComponent', () => {
-  let component: AutocompleteComponent;
-  let fixture: ComponentFixture<AutocompleteComponent>;
+  let component: MapsautocompleteComponent;
+  let fixture: ComponentFixture<MapsautocompleteComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AutocompleteComponent ],
+      declarations: [ MapsautocompleteComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AutocompleteComponent);
+    fixture = TestBed.createComponent(MapsautocompleteComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

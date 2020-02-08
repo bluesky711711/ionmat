@@ -4,13 +4,13 @@ import { CommonModule } from '@angular/common';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AutocompleteComponent } from './autocomplete.component';
+import { MapsautocompleteComponent } from './autocomplete.component';
 
 import { MatInputModule, MatAutocompleteModule } from '@angular/material';
 
 @NgModule({
   declarations: [
-    AutocompleteComponent
+    MapsautocompleteComponent
   ],
   imports: [
     CommonModule,
@@ -22,10 +22,10 @@ import { MatInputModule, MatAutocompleteModule } from '@angular/material';
     MatInputModule,
   ],
   exports: [
-    AutocompleteComponent
+    MapsautocompleteComponent
   ],
   entryComponents: [
-    AutocompleteComponent
+    MapsautocompleteComponent
   ]
 })
-export class AutocompleteModule {}
+export class MapsautocompleteModule {}
