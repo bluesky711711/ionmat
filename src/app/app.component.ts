@@ -17,6 +17,12 @@ export class AppComponent {
       icon: 'home'
     },
     {
+      title: 'Maps',
+      url: '/maps',
+      icon: 'map'
+
+    },
+    {
       title: 'Data',
       url: '/data',
       icon: 'grid'

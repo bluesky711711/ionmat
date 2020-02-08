@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'data',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+  },
+  {
+    path: 'maps',
+    loadChildren: () => import('./maps/maps.module').then( m => m.MapsPageModule)
   }
 ];
 

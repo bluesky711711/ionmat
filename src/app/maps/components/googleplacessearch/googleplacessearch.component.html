@@ -1,0 +1,11 @@
+<form [formGroup]="searchForm" novalidate>
+  <ion-item lines="full">
+  <ion-searchbar  formControlName="locSearch" class="searchbar" (ionInput)="searchPlace()" placeholder="Find location" #autocompleteinput></ion-searchbar>
+  <ion-button expand="block" slot="end"><ion-icon name="map" slot="end"></ion-icon>Show Map</ion-button>
+</ion-item>
+</form>
+<app-autocomplete [predictions]="predictions"></app-autocomplete>
+
+
+<div #addresstext></div>
+<div #pleaseConnect></div>
