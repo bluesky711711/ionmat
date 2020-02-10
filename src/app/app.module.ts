@@ -17,10 +17,11 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { DatetimemaskDirective } from './components/datepicker/directives/datetimemask.directive';
 import { MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/material';
+import { ModalmapComponent } from './maps/components/modalmap/modalmap.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, ModalmapComponent],
+  entryComponents: [ModalmapComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
