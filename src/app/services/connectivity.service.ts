@@ -7,7 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ConnectivityService {
 
-  constructor() { }
+  constructor() { 
+    this.addConnectivityListeners();
+  }
 
 public isOnline: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(navigator.onLine);
 public networkHandler: any;
