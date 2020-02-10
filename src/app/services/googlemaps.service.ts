@@ -133,4 +133,20 @@ export class GooglemapsService {
  
   }
 
+  editLoc(){
+    this.marker.setMap(null);
+    this.marker = null;
+    this.marker = new google.maps.Marker({
+      position: {lat: this.lat, lng: this.lng},
+      map: this.map,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+    });
+  }
+
+  doneEdit(){
+    const newLoc = this.marker.getPosition();
+    // this.marker.setDraggable(false);
+    return newLoc;
+  }
 }
