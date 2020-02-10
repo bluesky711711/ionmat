@@ -16,8 +16,8 @@
                   (optionSelected)="optionSelected($event)">
 
              
-                    <mat-option>
-                      Results here
+                    <mat-option *ngFor="let prediction of predictions" [value]="prediction">
+                      {{prediction.description}}
                     </mat-option>
             
 </mat-autocomplete>

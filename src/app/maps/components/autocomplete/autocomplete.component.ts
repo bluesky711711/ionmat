@@ -15,6 +15,8 @@ export class AutocompleteComponent implements OnInit {
 
   @Output() closed = new EventEmitter<any>();
 
+  @Output() locSelected = new EventEmitter<any>();
+
   @ViewChild('optionAutoCompleteInput', { read: MatAutocompleteTrigger, static: false })
 
   optionAutoCompleteInput: MatAutocompleteTrigger;
@@ -26,7 +28,8 @@ export class AutocompleteComponent implements OnInit {
 
 
   optionSelected(event) {
-    // emits option
+    // emits option 
+    this.locSelected.emit(event.option.value);
   }
 
   open() {
