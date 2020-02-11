@@ -80,7 +80,8 @@ export class GoogleplacessearchComponent implements OnInit, AfterViewInit {
         if (query.length > 1 && !this.searchDisabled) {
 
           const config = {
-            types: ['geocode'],
+            // types: ['geocode'],
+            // fields: ['address_component'],
             input: query
           };
 
@@ -145,7 +146,28 @@ export class GoogleplacessearchComponent implements OnInit, AfterViewInit {
       address2: '',
     };
 
-    this.placesService.getDetails({ placeId: place.place_id }, (details) => {
+    
+
+    const detailsFields = [
+      'address_components',
+     // 'adr_address',
+     // 'formatted_address',
+      'geometry',
+     // 'icon',
+      'name',
+     // 'permanently_closed',
+     // 'photo',
+      'place_id',
+      'plus_code',
+      // 'type',
+      // 'url',
+      // 'utc_offset',
+      'vicinity'
+    ];
+
+    this.placesService.getDetails({ placeId: place.place_id,
+                                   fields: detailsFields
+                                  }, (details) => {
       console.info({details});
       this.zone.run(() => {
 
