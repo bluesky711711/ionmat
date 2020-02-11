@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ConnectivityService } from './connectivity.service';
 
 declare var google: any;
 
@@ -12,16 +13,21 @@ export class GooglemapsService {
   mapElement: any;
   pleaseConnect: any;
   map: any;
+  marker: any;
+  lat: any;
+  lng: any;
   mapInitialised = false;
   mapLoaded: any;
   mapLoadedObserver: any;
   currentMarker: any;
   apiKey = 'AIzaSyDhLHwGT1wuZ7aKVGMQJWiTkmStxG8-CjQ';
 
-  constructor() {
-   // this.connectivityService.isOnline.subscribe((status) => {
-   //   this.online = status;});
-   this.online = true;
+  constructor(public connectivityService: ConnectivityService) {
+   this.connectivityService.isOnline.subscribe((status) => {
+     this.online = status;
+     if(status) {this.enableMap();}
+     else this.disableMap();
+    });
   }
 
   init(mapElement: any, pleaseConnect: any): Promise<any> {
@@ -91,24 +97,32 @@ export class GooglemapsService {
  
   }
 
-  initMap(): Promise<any> {
+  initMap(lat = 1.290270, lng = 103.851959, markerTitle = ''): Promise<any> {
     console.log("INITMAP");
- 
+    this.lat = lat;
+    this.lng = lng;
     this.mapInitialised = true;
  
      return new Promise((resolve) => {
  
   //    this.geolocation.getCurrentPosition().then((position) => {
- 
-      let latLng = new google.maps.LatLng(1.290270, 103.851959);
+      
+      let latLng = new google.maps.LatLng(lat, lng);
  
         let mapOptions = {
           center: latLng,
           zoom: 15,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         }
- 
-        this.map = new google.maps.Map(this.mapElement, mapOptions);
+        if(this.mapElement){
+          this.map = new google.maps.Map(this.mapElement, mapOptions);
+          const loc = {lat, lng}
+          this.marker = new google.maps.Marker({
+              position: loc,
+              map: this.map,
+              title: markerTitle
+            });
+        }
         resolve(true);
  
    //   }); 
@@ -133,4 +147,20 @@ export class GooglemapsService {
  
   }
 
+  editLoc(){
+    this.marker.setMap(null);
+    this.marker = null;
+    this.marker = new google.maps.Marker({
+      position: {lat: this.lat, lng: this.lng},
+      map: this.map,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+    });
+  }
+
+  doneEdit(){
+    const newLoc = this.marker.getPosition();
+    // this.marker.setDraggable(false);
+    return newLoc;
+  }
 }
