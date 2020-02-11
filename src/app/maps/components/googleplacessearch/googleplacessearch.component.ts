@@ -3,14 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 
 import { GooglemapsService } from '../../../services/googlemaps.service';
-<<<<<<< HEAD
 import { MapsautocompleteComponent } from '../autocomplete/autocomplete.component';
-=======
-import { AutocompleteComponent } from '../autocomplete/autocomplete.component';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ModalmapComponent } from '../modalmap/modalmap.component';
 import { ConnectivityService } from 'src/app/services/connectivity.service';
->>>>>>> bugfix/multiple
 
 declare var google: any;
 
