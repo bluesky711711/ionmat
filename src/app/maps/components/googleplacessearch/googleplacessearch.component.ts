@@ -19,7 +19,7 @@ export class GoogleplacessearchComponent implements OnInit, AfterViewInit {
 
   @Input() searchForm: FormGroup;
   @Input() addressForm: FormGroup;
-  @Input() predictions: Array<any>;
+  predictions: Array<any>;
 
   @ViewChild('addresstext', {static: false}) addresstext: ElementRef;
   @ViewChild('pleaseConnect', {static: false}) pleaseConnect: ElementRef;
