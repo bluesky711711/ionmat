@@ -18,7 +18,11 @@ const routes: Routes = [
   {
     path: 'maps',
     loadChildren: () => import('./maps/maps.module').then( m => m.MapsPageModule)
+  },  {
+    path: 'uploader',
+    loadChildren: () => import('./uploader/uploader.module').then( m => m.UploaderPageModule)
   }
+
 ];
 
 @NgModule({

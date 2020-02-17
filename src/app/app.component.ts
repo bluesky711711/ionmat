@@ -26,6 +26,11 @@ export class AppComponent {
       title: 'Data',
       url: '/data',
       icon: 'grid'
+    },
+    {
+      title: 'Uploader',
+      url: '/uploader',
+      icon: 'cloud-upload'
     }
   ];
 
