@@ -15,7 +15,6 @@ import { DbService } from './services/db.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { DatetimemaskDirective } from './components/datepicker/directives/datetimemask.directive';
 import { MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/material';
 import { ModalmapComponent } from './maps/components/modalmap/modalmap.component';
 

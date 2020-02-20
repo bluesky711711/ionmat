@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { UploaderPageRoutingModule } from './uploader-routing.module';
 
 import { UploaderPage } from './uploader.page';
+import { ImageUploaderModule } from '../components/image-uploader/image-uploader.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UploaderPageRoutingModule
+    UploaderPageRoutingModule,
+    ImageUploaderModule
   ],
   declarations: [UploaderPage]
 })

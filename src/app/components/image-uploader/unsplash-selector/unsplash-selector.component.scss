@@ -1,0 +1,36 @@
+.images-grid {
+    height: calc(100vh - 200px);
+    overflow: auto;
+}
+
+.image-box {
+    height: 100px;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.author {
+    position: absolute;
+    padding: 5px;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+    background: rgba(0,0,0,0.3);
+    color: white;
+    font-size: 0.7rem;
+    opacity: 0;
+}
+
+.image-box:hover .author {
+    opacity: 1;
+}
+
+ion-spinner {
+    position: absolute;
+    left: calc(50% - 10px);
+}

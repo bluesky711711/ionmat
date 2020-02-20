@@ -1,0 +1,17 @@
+<ion-item lines="none">
+  <ion-label>
+    <h1>Choose from <a [href]="'https://unsplash.com/' + linkSuffix" target="_blank">Unsplash</a></h1>
+  </ion-label>
+  <ion-icon [mat-dialog-close]="false" name="close" class="clickable"></ion-icon>
+</ion-item>
+<ion-searchbar (ionChange)="fetchImages($event)"></ion-searchbar>
+<ion-spinner *ngIf="loading"></ion-spinner>
+<ion-grid class="images-grid">
+  <ion-row>
+    <ion-col size="4" *ngFor="let image of images$ | async">
+      <div [style.background-image]="'url(' + image.url + ')'" class="image-box clickable" [mat-dialog-close]="image">
+        <a [href]="image.authorUrl + linkSuffix" target="_blank" class="author">{{image.author}}</a>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
