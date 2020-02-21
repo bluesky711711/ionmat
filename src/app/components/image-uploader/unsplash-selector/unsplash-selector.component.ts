@@ -24,6 +24,11 @@ export class UnsplashSelectorComponent implements OnInit {
   selectedImage: any;
   selectedImageURL: string;
 
+  slideOpts = {
+    zoom: false,
+    autoHeight: true,
+  };
+
   constructor(private unsplashService: UnsplashService,
               private modalCtrl: ModalController) {
     this.linkSuffix = this.unsplashService.getAttributionLinkSuffix();
@@ -57,6 +62,10 @@ export class UnsplashSelectorComponent implements OnInit {
     console.log(image);
     this.selectedImage = image;
     this.selectedImageURL = image.url;
+    this.thumbnails = !this.thumbnails;
+  }
+
+  toggleThumbnails() {
     this.thumbnails = !this.thumbnails;
   }
 
