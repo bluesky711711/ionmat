@@ -1,17 +1,86 @@
-<ion-item lines="none">
-  <ion-label>
-    <h1>Choose from <a [href]="'https://unsplash.com/' + linkSuffix" target="_blank">Unsplash</a></h1>
-  </ion-label>
-  <ion-icon [mat-dialog-close]="false" name="close" class="clickable"></ion-icon>
-</ion-item>
-<ion-searchbar (ionChange)="fetchImages($event)"></ion-searchbar>
-<ion-spinner *ngIf="loading"></ion-spinner>
-<ion-grid class="images-grid">
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Choose from <a [href]="'https://unsplash.com/' + linkSuffix" target="_blank">Unsplash</a></ion-title>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="dismiss()"><ion-icon slot="icon-only" name="close" ></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="thumbnails">
+    <ion-searchbar (ionChange)="fetchImages($event)"></ion-searchbar>
+  </ion-toolbar>
+  <ion-toolbar *ngIf="!thumbnails">
+    <ion-buttons slot="start">
+      <ion-button>PREV</ion-button>
+      <ion-button>NEXT</ion-button>
+    </ion-buttons>
+    <ion-title>
+      Results for [TERM HERE]
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        Search again
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div id="container" *ngIf="thumbnails">
+  <div id="spinner" [hidden]="!loading">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <div class="ion-text-center">
+          <ion-text>Searching Unsplash...</ion-text>
+        </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <div class="ion-text-center">
+          <ion-spinner></ion-spinner>
+        </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</div>
+
+<ion-grid class="images-grid ion-no-margin">
   <ion-row>
     <ion-col size="4" *ngFor="let image of images$ | async">
-      <div [style.background-image]="'url(' + image.url + ')'" class="image-box clickable" [mat-dialog-close]="image">
+      <div [style.background-image]="'url(' + image.url + ')'" class="image-box clickable" (click)="getImage(image)">
         <a [href]="image.authorUrl + linkSuffix" target="_blank" class="author">{{image.author}}</a>
       </div>
     </ion-col>
   </ion-row>
 </ion-grid>
+</div>
+
+<div *ngIf="!thumbnails">
+  <ion-slides>
+    
+    <ion-slide>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="1">
+            <ion-button><ion-icon name="back-arrow"></ion-icon>PREVIOUS</ion-button>
+          </ion-col>
+          <ion-col>
+            <img [src]="selectedImageURL" (click)="getImage(image)">
+          </ion-col>
+          <ion-col size="1">
+            <ion-button><ion-icon name="forward-arrow"></ion-icon>NEXT</ion-button>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button size="block">SELECT</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+     
+
+    </ion-slide>
+  </ion-slides>
+
+</div>
+</ion-content>

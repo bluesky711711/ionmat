@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UnsplashService } from '../unsplash.service';
+
+import { ModalController } from '@ionic/angular';
+
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
@@ -16,7 +19,13 @@ export class UnsplashSelectorComponent implements OnInit {
 
   linkSuffix = '';
 
-  constructor(private unsplashService: UnsplashService) {
+  thumbnails = true;
+
+  selectedImage: any;
+  selectedImageURL: string;
+
+  constructor(private unsplashService: UnsplashService,
+              private modalCtrl: ModalController) {
     this.linkSuffix = this.unsplashService.getAttributionLinkSuffix();
   }
 
@@ -36,6 +45,19 @@ export class UnsplashSelectorComponent implements OnInit {
   fetchImages(event: CustomEvent) {
     this.unsplashService.fetchImages(event.detail.value);
     this.loading = true;
+  }
+
+  dismiss() {
+    this.modalCtrl.dismiss({
+      'dismissed': true,
+    });
+  }
+
+  getImage(image) {
+    console.log(image);
+    this.selectedImage = image;
+    this.selectedImageURL = image.url;
+    this.thumbnails = !this.thumbnails;
   }
 
 }
