@@ -2,7 +2,7 @@ import { IonDatetime } from '@ionic/angular';
 import * as moment from 'moment';
 
 export class Data {
-    constructor(public id = 0, public name = '') { }
+    constructor(public id = 0, public name = '', public key : any = null) { }
 
     static startTimeVal: number = 0;
     static endTimeVal: number = 0;

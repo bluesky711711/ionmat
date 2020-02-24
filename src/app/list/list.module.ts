@@ -10,6 +10,8 @@ import { ListPage } from './list.page';
 import { ScrollDetectorDirective } from '../directives/scroll-detector.directive';
 import { DragScrollModule } from 'cdk-drag-scroll';
 
+import { DataItemComponent } from './data-item/data-item.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,9 +23,17 @@ import { DragScrollModule } from 'cdk-drag-scroll';
       {
         path: '',
         component: ListPage
+      },
+      {
+        path: ':id',
+        component: DataItemComponent
       }
     ])
   ],
-  declarations: [ListPage, ScrollDetectorDirective]
+  declarations: [
+    ListPage, 
+    ScrollDetectorDirective,
+    DataItemComponent
+  ]
 })
 export class ListPageModule {}
