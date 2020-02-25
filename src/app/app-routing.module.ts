@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { PagesModule } from'./pages/pages.module';
 import { Error404Component } from './pages/error404/error404.component';
+import { DataItemComponent } from './list/data-item/data-item.component';
 
 const routes: Routes = [
   {
@@ -26,10 +27,14 @@ const routes: Routes = [
     path: 'uploader',
     loadChildren: () => import('./uploader/uploader.module').then( m => m.UploaderPageModule),
   },
-
   { 
     path: '404', 
     component: Error404Component
+  },
+
+  {
+    path: ':id',
+    component: DataItemComponent
   },
 
   // Page Not found
@@ -42,9 +47,11 @@ const routes: Routes = [
     PagesModule,
   ],
   declarations: [
+    DataItemComponent
   ],
   exports: [
     RouterModule,
+    DataItemComponent
   ],
 })
 export class AppRoutingModule {}
