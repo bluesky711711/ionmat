@@ -20,14 +20,13 @@ export class DataItemComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      console.log('id ####', this.id)
+      
       this.dataService.getData().subscribe(data => {
-        console.log('data ####', data)
+
         let idx = data.findIndex(elem => elem.key === this.id);
         if (idx > -1) {
-          console.log('idx > -1')
+
         } else {
-          console.log('go to 404 page.')
           this.router.navigate(['404']);
         }
       });
