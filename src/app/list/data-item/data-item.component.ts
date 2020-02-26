@@ -20,10 +20,11 @@ export class DataItemComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      
-      this.dataService.getData().subscribe(data => {
 
-        let idx = data.findIndex(elem => elem.key === this.id);
+      this.dataService.getData().subscribe(data => {
+        console.log(data);
+
+        const idx = data.findIndex(elem => elem.key === this.id);
         if (idx > -1) {
 
         } else {
