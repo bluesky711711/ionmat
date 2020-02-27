@@ -33,7 +33,7 @@
 <ion-grid class="images-grid ion-no-margin">
   <ion-row>
     <ion-col size="4" *ngFor="let image of images$ | async">
-      <div [style.background-image]="'url(' + image.url + ')'" class="image-box clickable" (click)="getImage(image)">
+      <div [style.background-image]="'url(' + image.thumbUrl + ')'" class="image-box clickable" (click)="getImage(image)">
         <a [href]="image.authorUrl + linkSuffix" target="_blank" class="author">{{image.author}}</a>
       </div>
     </ion-col>
@@ -67,7 +67,7 @@
             <ion-button fill="clear" shape="round" color="dark"><ion-icon slot="icon-only" name="ios-arrow-back"></ion-icon></ion-button>
           </ion-col>
           <ion-col>
-            <img [src]="selectedImageURL">
+            <img [src]="selectedImageURL" (click)="selectImageAndDismiss()">
           </ion-col>
           <ion-col size="auto">
             <ion-button fill="clear" shape="round" color="dark"><ion-icon slot="icon-only" name="ios-arrow-forward"></ion-icon></ion-button>

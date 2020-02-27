@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Crop your image</ion-title>
+        <ion-buttons slot="start">
+            <ion-button fill="clear" (click)="dismiss()">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div>
+        <div #cropDiv>
+
+        </div>
+    </div>
+    <ion-button expand="block" (click)="finalizeCrop()">Done</ion-button>
+</ion-content>

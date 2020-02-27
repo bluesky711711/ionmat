@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-unsplash-selector',
@@ -30,7 +31,8 @@ export class UnsplashSelectorComponent implements OnInit {
   };
 
   constructor(private unsplashService: UnsplashService,
-              private modalCtrl: ModalController) {
+              private modalCtrl: ModalController,
+              private http: HttpClient) {
     this.linkSuffix = this.unsplashService.getAttributionLinkSuffix();
   }
 
@@ -40,7 +42,12 @@ export class UnsplashSelectorComponent implements OnInit {
     this.loading = true;
 
     this.images$ = this.unsplashService.images$.pipe(
-      map((images) => images.map((image) => ({ url: image.urls.thumb, author: image.user.name, authorUrl: image.user.links.html }))),
+      map((images) => images.map((image) => ({
+        thumbUrl: image.urls.thumb,
+        author: image.user.name,
+        authorUrl: image.user.links.html,
+        regularSizeUrl: image.urls.regular
+      }))),
       tap(() => {
         this.loading = false;
       })
@@ -52,21 +59,35 @@ export class UnsplashSelectorComponent implements OnInit {
     this.loading = true;
   }
 
-  dismiss() {
+  async dismiss() {
     this.modalCtrl.dismiss({
       'dismissed': true,
     });
   }
 
+  // async downloadImage(url: string): Promise<string> {
+  //   const response = await this.http.get(url, { responseType: 'blob' }).toPromise();
+  //   const urlCreator = window.URL;
+  //   const imagePath = urlCreator.createObjectURL(response);
+  //   return imagePath;
+  // }
+
   getImage(image) {
     console.log(image);
     this.selectedImage = image;
-    this.selectedImageURL = image.url;
+    this.selectedImageURL = image.thumbUrl;
     this.thumbnails = !this.thumbnails;
   }
 
   toggleThumbnails() {
     this.thumbnails = !this.thumbnails;
+  }
+
+  selectImageAndDismiss() {
+    this.modalCtrl.dismiss({
+      dismissed: true,
+      imageUrl: this.selectedImage.regularSizeUrl
+    });
   }
 
 }

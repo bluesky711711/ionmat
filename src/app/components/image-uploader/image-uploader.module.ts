@@ -5,11 +5,13 @@ import { ImageUploaderComponent } from './image-uploader/image-uploader.componen
 import { UnsplashSelectorComponent } from './unsplash-selector/unsplash-selector.component';
 import { MatDialogModule} from '@angular/material';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { ImageCropperComponent } from './image-cropper/image-cropper.component';
+import { CustomImagePreviewComponent } from './custom-image-preview/custom-image-preview.component';
 
 
 @NgModule({
-  declarations: [ImageUploaderComponent, UnsplashSelectorComponent],
-  entryComponents: [UnsplashSelectorComponent],
+  declarations: [ImageUploaderComponent, UnsplashSelectorComponent, ImageCropperComponent, CustomImagePreviewComponent],
+  entryComponents: [UnsplashSelectorComponent, ImageCropperComponent],
   imports: [
     CommonModule,
     IonicModule,
