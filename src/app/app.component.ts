@@ -31,6 +31,11 @@ export class AppComponent {
       title: 'Uploader',
       url: '/uploader',
       icon: 'cloud-upload'
+    },
+    {
+      title: 'Colors',
+      url: '/colors',
+      icon: 'color-palette'
     }
   ];
 

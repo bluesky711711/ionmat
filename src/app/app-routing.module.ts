@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-import { PagesModule } from'./pages/pages.module';
+import { PagesModule } from './pages/pages.module';
 import { Error404Component } from './pages/error404/error404.component';
 import { DataItemComponent } from './list/data-item/data-item.component';
 
@@ -16,6 +16,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
   },
   {
+    path: 'colors',
+    loadChildren: () => import('./colors/colors.module').then( m => m.ColorsPageModule)
+  },
+  {
     path: 'data',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule),
   },
@@ -27,8 +31,8 @@ const routes: Routes = [
     path: 'uploader',
     loadChildren: () => import('./uploader/uploader.module').then( m => m.UploaderPageModule),
   },
-  { 
-    path: '404', 
+  {
+    path: '404',
     component: Error404Component
   },
 
@@ -38,7 +42,8 @@ const routes: Routes = [
   },
 
   // Page Not found
-  { path: '**', redirectTo: '404' }
+  { path: '**', redirectTo: '404' },
+
 ];
 
 @NgModule({
