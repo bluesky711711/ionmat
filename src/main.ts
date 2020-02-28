@@ -5,7 +5,7 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 
 // Stencil components
-import { applyPolyfills, defineCustomElements } from 'nolson-color-picker/loader';
+import { applyPolyfills, defineCustomElements } from 'custom-color-generator/loader';
 
 if (environment.production) {
   enableProdMode();

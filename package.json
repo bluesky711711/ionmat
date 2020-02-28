@@ -30,6 +30,7 @@
     "cdk-drag-scroll": "0.0.6",
     "cordova-android": "8.1.0",
     "core-js": "^2.5.4",
+    "custom-color-generator": "0.0.2",
     "date-fns": "^2.9.0",
     "ionicons": "^5.0.0",
     "moment": "^2.24.0",
