@@ -5,7 +5,7 @@ import { ModalController } from '@ionic/angular';
 
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { UnsplashImage } from '../models/image-uploader.model';
 
 @Component({
   selector: 'app-unsplash-selector',
@@ -14,7 +14,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UnsplashSelectorComponent implements OnInit {
 
-  images$: Observable<any[]>;
+  images$: Observable<UnsplashImage[]>;
 
   loading = false;
 
@@ -22,7 +22,7 @@ export class UnsplashSelectorComponent implements OnInit {
 
   thumbnails = true;
 
-  selectedImage: any;
+  selectedImage: UnsplashImage;
   selectedImageURL: string;
 
   slideOpts = {
@@ -31,8 +31,7 @@ export class UnsplashSelectorComponent implements OnInit {
   };
 
   constructor(private unsplashService: UnsplashService,
-              private modalCtrl: ModalController,
-              private http: HttpClient) {
+              private modalCtrl: ModalController) {
     this.linkSuffix = this.unsplashService.getAttributionLinkSuffix();
   }
 
@@ -46,7 +45,9 @@ export class UnsplashSelectorComponent implements OnInit {
         thumbUrl: image.urls.thumb,
         author: image.user.name,
         authorUrl: image.user.links.html,
-        regularSizeUrl: image.urls.regular
+        fullSizeUrl: image.urls.full,
+        width: image.width,
+        height: image.height
       }))),
       tap(() => {
         this.loading = false;
@@ -65,13 +66,6 @@ export class UnsplashSelectorComponent implements OnInit {
     });
   }
 
-  // async downloadImage(url: string): Promise<string> {
-  //   const response = await this.http.get(url, { responseType: 'blob' }).toPromise();
-  //   const urlCreator = window.URL;
-  //   const imagePath = urlCreator.createObjectURL(response);
-  //   return imagePath;
-  // }
-
   getImage(image) {
     console.log(image);
     this.selectedImage = image;
@@ -86,7 +80,7 @@ export class UnsplashSelectorComponent implements OnInit {
   selectImageAndDismiss() {
     this.modalCtrl.dismiss({
       dismissed: true,
-      imageUrl: this.selectedImage.regularSizeUrl
+      selectedImage: this.selectedImage
     });
   }
 

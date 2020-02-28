@@ -14,6 +14,7 @@ export class ImageCropperComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() imageToCrop;
   @Input() cropToHeight;
   @Input() cropToWidth;
+  @Input() type;
 
   croppedImage;
 
@@ -49,7 +50,8 @@ export class ImageCropperComponent implements OnInit, AfterViewInit, OnDestroy {
 
       opts.viewport = {
         width: viewportWidth,
-        height: viewportHeight
+        height: viewportHeight,
+        type: this.type
       };
 
       opts.boundary = {

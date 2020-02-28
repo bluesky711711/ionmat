@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { MatDialog } from '@angular/material';
 import { UnsplashSelectorComponent } from '../unsplash-selector/unsplash-selector.component';
 
-import { ModalController } from '@ionic/angular';
+import { ModalController, AlertController } from '@ionic/angular';
 import { ImageCropperComponent } from '../image-cropper/image-cropper.component';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { FileImage, UnsplashImage } from '../models/image-uploader.model';
 
 @Component({
   selector: 'app-image-uploader',
@@ -15,33 +15,46 @@ export class ImageUploaderComponent implements OnInit {
 
   @Input() width: number;
   @Input() height: number;
+  @Input() type = 'square';
 
   file: File;
 
   croppedImageUrl: SafeUrl;
 
   constructor(private modalCtrl: ModalController,
-              private sanitizer: DomSanitizer) { }
+              private sanitizer: DomSanitizer,
+              private alertCtrl: AlertController) { }
 
   ngOnInit() { }
 
   async onSelect(event) {
     this.file = event.addedFiles[0];
-    const fileUrl = await this.readAndGetFileUrl(this.file);
-    await this.openCropperModal(fileUrl);
+    const fileImage = await this.readAndGetFileImage(this.file);
+    if (this.checkImageDimensions(fileImage.width, fileImage.height)) {
+      await this.openCropperModal(fileImage.imageUrl);
+    }
   }
 
   removeSelected() {
     this.croppedImageUrl = null;
   }
 
-  async readAndGetFileUrl(file: File): Promise<string> {
+  async readAndGetFileImage(file: File): Promise<FileImage> {
 
     return new Promise((resolve, reject) => {
       const fr = new FileReader();
 
       fr.onloadend = (loadEvent) => {
-        resolve(fr.result.toString());
+        const fileImageUrl = fr.result.toString();
+        const image = new Image();
+        image.src = fileImageUrl;
+        image.onload = () => {
+          resolve({
+            imageUrl: fileImageUrl,
+            width: image.width,
+            height: image.height
+          });
+        };
       };
 
       fr.readAsDataURL(file);
@@ -55,9 +68,11 @@ export class ImageUploaderComponent implements OnInit {
     });
 
     modal.onDidDismiss().then(async (res) => {
-      if (res && res.data && res.data.imageUrl) {
-        const imageUrl = res.data.imageUrl;
-        await this.openCropperModal(imageUrl);
+      if (res.data && res.data.selectedImage) {
+        const unsplashImage: UnsplashImage = res.data.selectedImage;
+        if (this.checkImageDimensions(unsplashImage.width, unsplashImage.height)) {
+          await this.openCropperModal(unsplashImage.fullSizeUrl);
+        }
       }
     });
 
@@ -71,7 +86,8 @@ export class ImageUploaderComponent implements OnInit {
       componentProps: {
         imageToCrop: imageUrl,
         cropToHeight: this.height,
-        cropToWidth: this.width
+        cropToWidth: this.width,
+        type: this.type
       }
     });
 
@@ -84,6 +100,26 @@ export class ImageUploaderComponent implements OnInit {
     });
 
     return await modal.present();
+  }
+
+  checkImageDimensions(imageWidth: number, imageHeight: number) {
+    if (this.width > imageWidth || this.height > imageHeight) {
+      this.showInvalidDimensionsAlert();
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  async showInvalidDimensionsAlert() {
+    const alert = await this.alertCtrl.create({
+      header: 'Invalid image sizes',
+      subHeader: 'Image cant be cropped to these sizes',
+      message: 'Please choose a different image or modify the dimensions needed.',
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 }
