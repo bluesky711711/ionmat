@@ -15,6 +15,9 @@ import { DbService } from './services/db.service';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import { MatFormFieldModule, MatInputModule, MatIconModule } from '@angular/material';
 import { ModalmapComponent } from './maps/components/modalmap/modalmap.component';
 
@@ -32,7 +35,11 @@ import { ModalmapComponent } from './maps/components/modalmap/modalmap.component
     InMemoryWebApiModule.forRoot(DbService),
     MatIconModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   exports: [
     MatIconModule,

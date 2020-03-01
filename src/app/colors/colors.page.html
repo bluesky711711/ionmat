@@ -1,23 +1,54 @@
 <ion-header>
+  <ion-grid class="ion-no-padding" [fixed]="fixed">
   <ion-toolbar>
-    <ion-title>Colors</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Colors {{breakpoint}} {{width}}</ion-title>
   </ion-toolbar>
+</ion-grid>
 </ion-header>
 
-<ion-content>
-  <ion-item>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-  <color-generator></color-generator>
-</ion-col>
-</ion-row>
-<ion-row>
-  <ion-col>
-    <ion-button size="block" [disabled]="true">UPDATE</ion-button>
-  </ion-col>
-</ion-row>
+<ion-content color="light">
+
+  <ion-grid [fixed]="fixed" class="ion-no-padding">
+    <!-- XL & LG VIEWPORT -->
+   
+   
+      <ion-card class="ion-no-padding" *ngIf="breakpoint === 'lg' || breakpoint === 'xl'">
+        <ion-list class="ion-no-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <color-generator></color-generator>
+            </ion-col>
+            <ion-col>
+              <color-gen-preview></color-gen-preview>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+      </ion-card>
+
+
+  
+    <!-- MD, SM & XS VIEWPORT -->
+    <ng-container *ngIf="(breakpoint === 'md') || (breakpoint === 'sm') || (breakpoint === 'xs')">
+      <ion-list class="ion-no-padding">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <color-generator></color-generator>
+          </ion-col>
+          <ion-col>
+            <color-gen-preview></color-gen-preview>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+  </ng-container>
+
+  
 </ion-grid>
-</ion-item>
 
 </ion-content>

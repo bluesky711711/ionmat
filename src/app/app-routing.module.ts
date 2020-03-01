@@ -32,6 +32,10 @@ const routes: Routes = [
     loadChildren: () => import('./uploader/uploader.module').then( m => m.UploaderPageModule),
   },
   {
+    path: 'calendar',
+    loadChildren: () => import('./calendar/calendar.module').then( m => m.CalendarPageModule)
+  },
+  {
     path: '404',
     component: Error404Component
   },
@@ -43,6 +47,7 @@ const routes: Routes = [
 
   // Page Not found
   { path: '**', redirectTo: '404' },
+
 
 ];
 
