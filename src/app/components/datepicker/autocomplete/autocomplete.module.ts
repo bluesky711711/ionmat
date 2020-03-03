@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { TimeautocompleteComponent } from './autocomplete.component';
 
 import { MatInputModule, MatAutocompleteModule } from '@angular/material';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MatInputModule, MatAutocompleteModule } from '@angular/material';
     ReactiveFormsModule,
     MatAutocompleteModule,
     MatInputModule,
+    OverlayModule
   ],
   exports: [
     TimeautocompleteComponent
