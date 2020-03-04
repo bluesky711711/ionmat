@@ -21,9 +21,9 @@ export class GoogleplacessearchComponent implements OnInit, AfterViewInit {
   @Input() addressForm: FormGroup;
   predictions: Array<any>;
 
-  @ViewChild('addresstext', {static: false}) addresstext: ElementRef;
-  @ViewChild('pleaseConnect', {static: false}) pleaseConnect: ElementRef;
-  @ViewChild(MapsautocompleteComponent, {static: false}) child;
+  @ViewChild('addresstext') addresstext: ElementRef;
+  @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
+  @ViewChild(MapsautocompleteComponent) child;
 
   triggerAutocomplete() {
     console.log('triggerAutocomplete');

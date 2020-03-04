@@ -10,7 +10,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 export class ModalmapComponent implements OnInit {
 
   chosenlocation;
-  @ViewChild('addresstext', { static: false }) addresstext: ElementRef;
+  @ViewChild('addresstext') addresstext: ElementRef;
 
   constructor(
     public mapService: GooglemapsService,

@@ -1,7 +1,7 @@
 <form [formGroup]="searchForm" novalidate>
   <ion-item lines="full">
   <ion-searchbar formControlName="locSearch" class="searchbar" (ionInput)="searchPlace()" [disabled]="!online" placeholder="{{placeholder}}" #autocompleteinput></ion-searchbar>
-  <ion-button expand="block" slot="end" [disabled]="!online || !showMapBtn" (click)="presentModal($event)"><ion-icon name="map" slot="end"></ion-icon>Show Map</ion-button>
+  <ion-button expand="block" slot="end" [disabled]="!online || !showMapBtn" (click)="presentModal()"><ion-icon name="map" slot="end"></ion-icon>Show Map</ion-button>
 </ion-item>
 </form>
 <app-autocomplete [predictions]="predictions" (locSelected)="locSelected($event)"></app-autocomplete>

@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ChipselectComponent } from './chipselect.component';
+import { HomemodalPage } from './homemodal.page';
 
-describe('ChipselectComponent', () => {
-  let component: ChipselectComponent;
-  let fixture: ComponentFixture<ChipselectComponent>;
+describe('HomemodalPage', () => {
+  let component: HomemodalPage;
+  let fixture: ComponentFixture<HomemodalPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChipselectComponent ],
+      declarations: [ HomemodalPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ChipselectComponent);
+    fixture = TestBed.createComponent(HomemodalPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

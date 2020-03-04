@@ -6,14 +6,12 @@ import { ModalController } from '@ionic/angular';
 
 import { DataService } from '../services/data.service';
 
-import { HomemodalPage } from '../homemodal/homemodal.page';
-
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-homemodal',
+  templateUrl: './homemodal.page.html',
+  styleUrls: ['./homemodal.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomemodalPage implements OnInit {
 
   options: any;
   public allday: boolean;
@@ -25,8 +23,7 @@ export class HomePage implements OnInit {
     display_field: 'name',
     editpagetarget: 'target',
     color: 'primary',
-    editlabel: 'Manage Chips',
-    maxChips: 1
+    editlabel: 'Manage Chips'
   };
 
   constructor(private formBuilder: FormBuilder, private data: DataService, private modalCtrl: ModalController) {
@@ -40,7 +37,6 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.data.getData().subscribe(data => {
       this.options = data;
-      console.log(this.options);
     });
     this.allday = false;
   }
@@ -54,11 +50,8 @@ export class HomePage implements OnInit {
     return dt;
   }
 
-  async loadModal() {
-    const modal = await this.modalCtrl.create({
-      component: HomemodalPage
-    });
-    return await modal.present();
-
+  dismiss() {
+    this.modalCtrl.dismiss();
   }
+
 }

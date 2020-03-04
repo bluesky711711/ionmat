@@ -10,6 +10,8 @@ export class ChipautocompleteComponent implements OnInit {
 
   @Input() options: Array<string>;
 
+  @Input() buttonlabel: string;
+
   @Output() selectedOption = new EventEmitter<any>();
 
   @Output() optionSelected = new EventEmitter<any>();

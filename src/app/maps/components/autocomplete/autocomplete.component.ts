@@ -17,7 +17,7 @@ export class MapsautocompleteComponent implements OnInit {
 
   @Output() locSelected = new EventEmitter<any>();
 
-  @ViewChild('optionAutoCompleteInput', { read: MatAutocompleteTrigger, static: false })
+  @ViewChild('optionAutoCompleteInput', { read: MatAutocompleteTrigger })
 
   optionAutoCompleteInput: MatAutocompleteTrigger;
 

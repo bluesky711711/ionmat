@@ -10,7 +10,7 @@ import { MapsPageRoutingModule } from './maps-routing.module';
 
 import { MapsPage } from './maps.page';
 import { GoogleplacessearchComponent } from './components/googleplacessearch/googleplacessearch.component';
-import { MapsautocompleteComponent } from './components/autocomplete/autocomplete.component';
+import { MapsautocompleteModule } from './components/autocomplete/autocomplete.module';
 
 @NgModule({
   imports: [
@@ -20,8 +20,9 @@ import { MapsautocompleteComponent } from './components/autocomplete/autocomplet
     IonicModule,
     MapsPageRoutingModule,
     MatInputModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MapsautocompleteModule
   ],
-  declarations: [MapsPage, GoogleplacessearchComponent, MapsautocompleteComponent]
+  declarations: [MapsPage, GoogleplacessearchComponent]
 })
 export class MapsPageModule {}

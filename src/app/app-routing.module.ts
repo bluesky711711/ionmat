@@ -46,7 +46,11 @@ const routes: Routes = [
   },
 
   // Page Not found
-  { path: '**', redirectTo: '404' },
+  { path: '**', redirectTo: '404' },  {
+    path: 'homemodal',
+    loadChildren: () => import('./homemodal/homemodal.module').then( m => m.HomemodalPageModule)
+  },
+
 
 
 ];

@@ -62,8 +62,8 @@ export class DatepickerComponent implements OnInit, OnChanges {
   @Input() min: Date;
   @Input() max: Date;
 
-  @ViewChild('trackAutoCompleteInput', { read: MatAutocompleteTrigger, static: false })
-  @ViewChild(TimeautocompleteComponent, { static: false }) child;
+  // @ViewChild('trackAutoCompleteInput', { read: MatAutocompleteTrigger })
+  @ViewChild(TimeautocompleteComponent) child;
 
   trackAutoCompleteInput: MatAutocompleteTrigger;
 
