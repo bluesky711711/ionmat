@@ -1,10 +1,12 @@
-import { Component, ViewChild, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter, OnInit, ViewContainerRef } from '@angular/core';
 
 import { MatAutocompleteTrigger } from '@angular/material';
 
 import { DatePickerService } from '../datepicker.service';
 
 import { getTime, addMinutes, subMinutes } from 'date-fns';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 
 @Component({
   selector: 'app-timeautocomplete',
@@ -80,8 +82,9 @@ export class TimeautocompleteComponent implements OnInit {
 
   public from: Date;
   public to: Date;
+  private overlayRef: OverlayRef;
 
-  constructor(public dtservice: DatePickerService) {}
+  constructor(public dtservice: DatePickerService, private overlay: Overlay, private viewContainer: ViewContainerRef) {}
 
   ngOnInit() {
 
@@ -121,11 +124,27 @@ export class TimeautocompleteComponent implements OnInit {
 
   }
 
+  createOverlay() {
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true, 
+      backdropClass: 'backdrop--autocomplete'
+    });
+    const portal = new TemplatePortal(this.optionAutoCompleteInput.autocomplete.template, this.viewContainer);
+
+    this.overlayRef.attach(portal);
+    this.overlayRef.backdropClick().subscribe(r => {
+      this.optionAutoCompleteInput.closePanel();
+      this.overlayRef.detach();
+    });
+  }
+
   optionSelected(event) {
     this.timeSelected.emit(event.option.value);
   }
 
   open() {
+    this.createOverlay();
+
     this.optionAutoCompleteInput.openPanel();
   }
 
@@ -135,5 +154,6 @@ export class TimeautocompleteComponent implements OnInit {
 
   autoclosed() {
     this.closed.emit();
+    this.overlayRef.detach();
   }
 }
