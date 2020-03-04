@@ -2,13 +2,12 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { OverlayModule } from '@angular/cdk/overlay';
-
 import { IonicModule } from '@ionic/angular';
 
 import { TimeautocompleteComponent } from './autocomplete.component';
 
 import { MatInputModule, MatAutocompleteModule } from '@angular/material';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [

@@ -5,9 +5,9 @@ import { MatAutocompleteTrigger } from '@angular/material';
 import { DatePickerService } from '../datepicker.service';
 
 import { getTime, addMinutes, subMinutes } from 'date-fns';
-
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
+
 
 @Component({
   selector: 'app-timeautocomplete',
@@ -129,6 +129,20 @@ export class TimeautocompleteComponent implements OnInit {
 
   }
 
+  createOverlay() {
+    this.overlayRef = this.overlay.create({
+      hasBackdrop: true, 
+      backdropClass: 'backdrop--autocomplete'
+    });
+    const portal = new TemplatePortal(this.optionAutoCompleteInput.autocomplete.template, this.viewContainer);
+
+    this.overlayRef.attach(portal);
+    this.overlayRef.backdropClick().subscribe(r => {
+      this.optionAutoCompleteInput.closePanel();
+      this.overlayRef.detach();
+    });
+  }
+
   optionSelected(event) {
     this.timeSelected.emit(event.option.value);
   }
@@ -147,17 +161,4 @@ export class TimeautocompleteComponent implements OnInit {
     this.overlayRef.detach();
   }
 
-  createOverlay() {
-        this.overlayRef = this.overlay.create({
-          hasBackdrop: true,
-          backdropClass: 'backdrop--autocomplete'
-        });
-        const portal = new TemplatePortal(this.optionAutoCompleteInput.autocomplete.template, this.viewContainer);
-
-        this.overlayRef.attach(portal);
-        this.overlayRef.backdropClick().subscribe(r => {
-          this.optionAutoCompleteInput.closePanel();
-          this.overlayRef.detach();
-        });
-      }
 }
