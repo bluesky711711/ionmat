@@ -32,14 +32,24 @@
 
 <ion-grid class="images-grid ion-no-margin">
   <ion-row class="ion-align-items-start">
+
+<!--
     <ion-col size="4" *ngFor="let image of images$ | async" class="ion-align-self-start">
    
-<!--      <div [style.background-image]="'url(' + image.thumbUrl + ')'" class="image-box clickable" (click)="getImage(image)"> -->
+      <div [style.background-image]="'url(' + image.thumbUrl + ')'" class="image-box clickable" (click)="getImage(image)">
         <img [src]="image.thumbUrl" (click)="getImage(image)"/>
-<!--        <a [href]="image.authorUrl + linkSuffix" target="_blank" class="author">{{image.author}}</a> 
-      </div> -->
+        <a [href]="image.authorUrl + linkSuffix" target="_blank" class="author">{{image.author}}</a> 
+      </div> 
+    </ion-col>-->
+
+      <div class="pins">
+        <div class="pin" *ngFor="let image of images$ | async">
+          <img [src]="image.thumbUrl" (click)="getImage(image)"/>
+
+        </div>
+      </div>
   
-    </ion-col>
+    
   </ion-row>
 </ion-grid>
 </div>
