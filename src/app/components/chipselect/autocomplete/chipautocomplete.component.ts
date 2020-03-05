@@ -41,6 +41,11 @@ export class ChipautocompleteComponent implements OnInit {
   close(){
     this.optionAutoCompleteInput.closePanel();
   }
+
+  updatePosition() {
+    this.optionAutoCompleteInput.updatePosition();
+  }
+
   onPanelOpened() {
     this.panelOpened.emit();
   }

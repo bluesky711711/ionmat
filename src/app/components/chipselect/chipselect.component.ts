@@ -1,4 +1,4 @@
-import { Component, ViewChild, ChangeDetectorRef, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef, Input, EventEmitter, Output, OnInit, ViewChildren, QueryList, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { MatAutocompleteTrigger } from '@angular/material';
 
 import { ChipautocompleteComponent } from './autocomplete/chipautocomplete.component';
@@ -9,7 +9,7 @@ import { ChipserviceService } from './chipservice.service';
   selector: 'app-chipselect',
   providers: [ChipserviceService],
   templateUrl: './chipselect.component.html',
-  styleUrls: ['./chipselect.component.scss'],
+  styleUrls: ['./chipselect.component.scss']
 })
 export class ChipselectComponent implements OnInit {
 
@@ -59,9 +59,16 @@ export class ChipselectComponent implements OnInit {
     this.chipservice.newSelectedOptions.next(this.selectedOptions);
     this.chipservice.newSelectedOptions.subscribe(selectedoptions => {
       this.selectedOptions = selectedoptions;
+      if (this.child) {
+        // timeout to wait until all DOM events finish execution
+        setTimeout(
+          () => this.child.updatePosition(), 
+          50);
+      }
     });
     this.focus = false;
   }
+
   ionViewWillLeave() {
     this.child.close();
   }
