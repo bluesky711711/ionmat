@@ -8,9 +8,12 @@
 </ion-header>
 
 <ion-content>
-
+  <!-- Ionic Modal sets focus on the first input element -->
+  <!-- Angular Mat Datepicker has the hack of explicit focus on focused element -->
+  <!-- https://github.com/angular/components/blob/ef1673594f12f7f6af86fd6c9d5174da4502a788/src/material/datepicker/datepicker.ts#L366 -->
+  <input type="hidden">
   <ion-list-header color="light">Chip picker</ion-list-header>
-  <app-chipselect [chipoptions]="options" [config]="chipsConfig"></app-chipselect>
+  <app-chipselect *ngIf="options" [chipoptions]="options" [config]="chipsConfig"></app-chipselect>
   <ion-list-header color="light">Date picker</ion-list-header>
   <ion-item lines="full">
     <ion-label>All day</ion-label>
