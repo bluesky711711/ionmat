@@ -29,7 +29,10 @@ export class ImageUploaderComponent implements OnInit {
 
   async onSelect(event) {
     this.file = event.addedFiles[0];
+    console.log('this.file');
+    console.log(this.file);
     const fileImage = await this.readAndGetFileImage(this.file);
+    console.log(fileImage.imageUrl);
     if (this.checkImageDimensions(fileImage.width, fileImage.height)) {
       await this.openCropperModal(fileImage.imageUrl);
     }

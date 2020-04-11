@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { ModalController } from '@ionic/angular';
+import { ModalController, IonSlides } from '@ionic/angular';
 
 import { DataService } from '../services/data.service';
 
@@ -25,6 +25,8 @@ export class HomemodalPage implements OnInit {
     color: 'primary',
     editlabel: 'Manage Chips'
   };
+
+  @ViewChild('slides') slides: IonSlides;
 
   constructor(private formBuilder: FormBuilder, private data: DataService, private modalCtrl: ModalController) {
     this.form = this.formBuilder.group({
@@ -52,6 +54,14 @@ export class HomemodalPage implements OnInit {
 
   dismiss() {
     this.modalCtrl.dismiss();
+  }
+
+  next() {
+    this.slides.slideNext();
+  }
+
+  back() {
+    this.slides.slidePrev();
   }
 
 }
