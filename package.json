@@ -35,7 +35,7 @@
     "custom-color-generator": "^0.1.0",
     "date-fns": "^2.9.0",
     "ionicons": "^5.0.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ngx-dropzone": "^2.2.2",
     "nolson-color-picker": "0.0.1",
     "rxjs": "~6.5.4",
